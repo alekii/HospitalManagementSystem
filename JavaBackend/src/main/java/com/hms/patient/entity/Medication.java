@@ -1,7 +1,6 @@
 package com.hms.patient.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.List;
@@ -9,13 +8,24 @@ import java.util.List;
 @Entity
 @Table(name="medication")
 public class Medication {
-    private int doctorId;
-    private int patientId;
-    private String diagnosis;
+
+    @Column(name ="diagnosis")
+    private List<String> diagnosis;
+
+    @Column(name ="drugs")
     private List<String> drugs;
+
+    @Column(name ="date_diagnosed")
     private final Timestamp dateDiagnosed = Timestamp.from(Instant.now());
 
-    public String getDiagnosis() {
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Patient patient;
+
+    @Column(name ="amount_charged")
+    private double treatmentAmount;
+
+    //getters
+    public List<String> getDiagnosis() {
         return diagnosis;
     }
     public List<String> getDrugs() {
@@ -25,11 +35,7 @@ public class Medication {
         return dateDiagnosed;
     }
 
-    public int getDoctorId() {
-        return doctorId;
-    }
-
-    public int getPatientId() {
-        return patientId;
+    public Patient getPatient() {
+        return patient;
     }
 }

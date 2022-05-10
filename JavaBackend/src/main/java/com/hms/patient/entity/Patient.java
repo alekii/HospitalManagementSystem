@@ -11,6 +11,7 @@ import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,22 +22,37 @@ import java.util.Set;
 
 @Entity
 @Table(name="patients")
+
 public class Patient {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     int id;
+
     @Column(name="first_name")
     String firstName;
+
     @Column(name="last_name")
     String lastName;
+
     @Column(name="Age")
     int age;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Doctor doctor;
+
+    @OneToMany(mappedBy = "patients", cascade = CascadeType.ALL,orphanRemoval = true)
+    Set<Medication> medication = new LinkedHashSet<>();
+
+    @Column(name="payment_status")
+    private PaymentStatus paymentStatus;
+
 
     public Patient(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
+
+
 }

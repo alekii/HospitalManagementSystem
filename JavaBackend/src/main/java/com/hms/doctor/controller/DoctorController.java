@@ -21,10 +21,12 @@ public class DoctorController {
     public List<Doctor> findAll(){
         return doctorService.findAll();
     }
+
     @GetMapping("/doctor/{doctorId}")
     public Doctor findDoctor(@PathVariable int doctorId){
         return doctorService.findById(doctorId);
     }
+
     @PostMapping("/doctors/add")
     public  Doctor addDoctor(@RequestBody Doctor doctor){
         //id is 0 so add
@@ -35,7 +37,6 @@ public class DoctorController {
 
     @PutMapping("/doctors/update")
     public  Doctor updateDoctor(@RequestBody Doctor doctor){
-
         doctorService.save(doctor);
         return doctor;
     }
@@ -50,8 +51,10 @@ public class DoctorController {
         return "Deleted Doctor with Id "+doctorId;
     }
 
-    public String AddMedication(@RequestBody Medication medicationRequest){
-        doctorService.addMedication(medicationRequest);
+@PostMapping("/doctors/medication/add")
+    public String AddMedication(@RequestBody Medication medication){
+        doctorService.addMedication(medication);
         return "Added successfully";
     }
+
 }
