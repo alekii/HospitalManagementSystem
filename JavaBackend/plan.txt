@@ -1,0 +1,41 @@
+Doctor
+   -Functions 
+-Add Patient Name
+-Search patient 
+-Add patient name
+-Add Diagnosis
+-Add drugs 
+-Update Patient
+-View patient medical history
+
+
+Receptionist 
+-Add Patientif exists just book
+-Book appointment
+-Generate bill
+-Print bill(pdf)
+-(print pdf with option to buy drugs from pharmacy)
+
+Pharmacist
+-Add Drugs
+-Order drugs 
+-Add drug companies
+-(Sell drugs)
+
+
+Admin
+-View Revenue  
+-add doctor
+-no of patients treated 
+-no of drugs available
+-amount used to order drugs
+-add receptionist
+-add pharmacist
+-Can be more complex than this buy,"hey, let's keep it simple".
+
+Project Time 
+Backend one week 
+front end one week(REACT)
+Deadline 29th May 2021
+
+search function with LIMIT 
