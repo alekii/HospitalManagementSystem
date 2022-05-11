@@ -25,16 +25,16 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    int id;
+    private int id;
 
     @Column(name="first_name")
-    String firstName;
+    private String firstName;
 
     @Column(name="last_name")
-    String lastName;
+    private String lastName;
 
     @Column(name="Age")
-    int age;
+    private int age;
 
     @ManyToMany(mappedBy = "patients")
     private Set<Doctor> doctors = new LinkedHashSet<>();

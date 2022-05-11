@@ -31,7 +31,7 @@ Admin
 -amount used to order drugs
 -add receptionist
 -add pharmacist
--Can be more complex than this buy,"hey, let's keep it simple".
+-Can be more complex than this but,"hey, let's keep it simple".
 
 Project Time 
 Backend one week 
