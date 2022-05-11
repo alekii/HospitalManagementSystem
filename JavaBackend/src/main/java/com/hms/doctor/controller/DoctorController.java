@@ -45,7 +45,11 @@ public class DoctorController {
         doctorService.save(doctor);
         return doctor;
     }
-
+    @PutMapping("/patients/update")
+    public  String updatePatient(@RequestBody Patient patient){
+        patientService.save(patient);
+        return "patient updated successfully";
+    }
     @DeleteMapping("/doctors/{doctorId}")
     public String deleteDoctor(@PathVariable int doctorId){
         Optional<Doctor> doctor = Optional.ofNullable(doctorService.findById(doctorId));

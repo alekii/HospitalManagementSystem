@@ -25,4 +25,10 @@ public class PatientDAO {
         Session session = entityManager.unwrap(Session.class);
         session.save(medication);
     }
+
+    public void updatePatient(Patient patient){
+        Session session = entityManager.unwrap(Session.class);
+        patient.setId(0);
+        session.saveOrUpdate(patient);
+    }
 }

@@ -34,12 +34,15 @@ public class Doctor {
     String Speciality;
 
     //avoid chain deletion
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctors")
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+            @JoinTable(name="doctor_patients",
+                    joinColumns = {@JoinColumn(name="doctor_id")},
+                    inverseJoinColumns ={@JoinColumn(name="patient_id")})
     Set<Patient> patients = new LinkedHashSet<>();
 
     public void addPatient(Patient patient) {
          patients.add(patient);
-         patient.setDoctor(this);
+         patient.getDoctors().add(this);
     }
 
     //since we use hashSet

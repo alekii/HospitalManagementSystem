@@ -9,10 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -39,11 +36,11 @@ public class Patient {
     @Column(name="Age")
     int age;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Doctor doctor;
+    @ManyToMany(mappedBy = "patients")
+    private Set<Doctor> doctors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "patients", cascade = CascadeType.ALL,orphanRemoval = true)
-    Set<Medication> medication = new LinkedHashSet<>();
+    private Set<Medication> medication = new LinkedHashSet<>();
 
     @Column(name="payment_status")
     private PaymentStatus paymentStatus;

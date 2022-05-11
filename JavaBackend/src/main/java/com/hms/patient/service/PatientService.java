@@ -23,4 +23,9 @@ public class PatientService {
     public void addMedication(Medication medication){
        patientDAO.addMedication(medication);
     }
+
+    @Transactional
+    public void save(Patient patient){
+        patientDAO.updatePatient(patient);
+    }
 }
