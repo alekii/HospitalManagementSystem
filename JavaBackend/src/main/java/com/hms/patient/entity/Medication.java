@@ -9,6 +9,11 @@ import java.util.List;
 @Table(name="medication")
 public class Medication {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
+
     @Column(name ="diagnosis")
     private String diagnosis;
 
@@ -50,5 +55,25 @@ public class Medication {
 
     public double getTreatmentAmount() {
         return treatmentAmount;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public void setDrugs(String drugs) {
+        this.drugs = drugs;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public void setTreatmentAmount(double treatmentAmount) {
+        this.treatmentAmount = treatmentAmount;
     }
 }

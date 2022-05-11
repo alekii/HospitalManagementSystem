@@ -55,10 +55,4 @@ public class DoctorDAOImpl implements DoctorDAO {
         deleteQuery.executeUpdate();
     }
 
-    @Override
-    public void addMedication(Medication medication) {
-        Session session = entityManager.unwrap(Session.class);
-        session.save(medication);
-    }
-
 }

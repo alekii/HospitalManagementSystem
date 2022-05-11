@@ -11,5 +11,4 @@ public interface DoctorDAO {
      void save(Doctor doctor);
      void delete(int Id);
 
-    void addMedication(Medication medication);
 }

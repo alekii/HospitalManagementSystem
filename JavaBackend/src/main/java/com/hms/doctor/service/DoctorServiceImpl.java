@@ -40,8 +40,4 @@ public class DoctorServiceImpl implements DoctorService {
         doctorDAO.delete(Id);
     }
 
-    @Override
-    public void addMedication(Medication medication) {
-        doctorDAO.addMedication(medication);
-    }
 }

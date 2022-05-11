@@ -10,5 +10,4 @@ public interface DoctorService {
     Doctor findById(int Id);
     void save(Doctor doctor);
     void delete(int Id);
-    void addMedication(Medication medication);
 }
