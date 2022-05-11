@@ -10,10 +10,14 @@ import java.util.List;
 public class Medication {
 
     @Column(name ="diagnosis")
-    private List<String> diagnosis;
+    private String diagnosis;
 
     @Column(name ="drugs")
-    private List<String> drugs;
+    private String drugs;
+
+    //example: x-ray scan
+    @Column(name ="treatment")
+    private String treatment;
 
     @Column(name ="date_diagnosed")
     private final Timestamp dateDiagnosed = Timestamp.from(Instant.now());
@@ -25,10 +29,15 @@ public class Medication {
     private double treatmentAmount;
 
     //getters
-    public List<String> getDiagnosis() {
+    public String getDiagnosis() {
         return diagnosis;
     }
-    public List<String> getDrugs() {
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public String getDrugs() {
         return drugs;
     }
     public Timestamp getDateDiagnosed() {
@@ -37,5 +46,9 @@ public class Medication {
 
     public Patient getPatient() {
         return patient;
+    }
+
+    public double getTreatmentAmount() {
+        return treatmentAmount;
     }
 }
