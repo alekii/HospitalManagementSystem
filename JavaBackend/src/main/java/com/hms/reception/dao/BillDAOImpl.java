@@ -3,9 +3,11 @@ package com.hms.reception.dao;
 import com.hms.patient.entity.Patient;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 
+@Repository
 public class BillDAOImpl implements BillDAO{
 
     private final EntityManager entityManager;

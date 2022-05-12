@@ -2,10 +2,11 @@ package com.hms.pharmacy.dao;
 
 import com.hms.pharmacy.entity.Drug;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 
-
+@Repository
 public class DrugDAO {
     private final EntityManager entityManager;
 

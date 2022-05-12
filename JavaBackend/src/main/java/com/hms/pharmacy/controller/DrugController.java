@@ -1,6 +1,6 @@
 package com.hms.pharmacy.controller;
 
-import com.hms.pharmacy.DTO.DrugSale;
+import com.hms.pharmacy.request.DrugSale;
 import com.hms.pharmacy.entity.Drug;
 import com.hms.pharmacy.service.DrugService;
 import org.springframework.web.bind.annotation.*;

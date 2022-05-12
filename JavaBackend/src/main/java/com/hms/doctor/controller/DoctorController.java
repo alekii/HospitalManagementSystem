@@ -8,11 +8,8 @@ import com.hms.patient.entity.Patient;
 import com.hms.patient.service.PatientService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/employees")
 public class DoctorController {
     private final DoctorService doctorService;
     private final PatientService patientService;
@@ -22,7 +19,6 @@ public class DoctorController {
         this.patientService = patientService;
     }
 
-
     @PutMapping("/doctors/update")
     public  Doctor updateDoctor(@RequestBody Doctor doctor){
         doctorService.save(doctor);
@@ -30,11 +26,11 @@ public class DoctorController {
     }
     @PutMapping("/patients/update")
     public  String updatePatient(@RequestBody Patient patient){
-        patientService.save(patient);
+        patientService.updatePatient(patient);
         return "patient updated successfully";
     }
 
-@PostMapping("/doctors/patients/medication/add")
+@PostMapping("/patients/medication/add")
     public String AddMedication(@RequestBody MedicationDTO medicationDTO){
         Patient patient = patientService.findPatient(medicationDTO.getPatientId());
         Medication medication = new Medication();
@@ -42,8 +38,7 @@ public class DoctorController {
         medication.setDrugs(medicationDTO.getDrugs());
         medication.setTreatment(medicationDTO.getTreatment());
         medication.setTreatmentAmount(medicationDTO.getTreatmentAmount());
-        medication.setPatient(patient);
-        patientService.addMedication(medication);
+        patientService.addMedication(patient.getId(),medication);
         return "Medication for "+patient.getFirstName() +" " +patient.getLastName() +" Added successfully";
     }
 }

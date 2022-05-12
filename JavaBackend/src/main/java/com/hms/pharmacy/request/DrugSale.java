@@ -1,4 +1,4 @@
-package com.hms.pharmacy.DTO;
+package com.hms.pharmacy.request;
 
 public class DrugSale {
     int drugId;

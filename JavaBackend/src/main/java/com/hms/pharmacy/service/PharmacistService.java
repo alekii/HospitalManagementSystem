@@ -2,10 +2,12 @@ package com.hms.pharmacy.service;
 
 import com.hms.pharmacy.dao.PharmacistDAO;
 import com.hms.pharmacy.entity.Pharmacist;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class PharmacistService {
     private final PharmacistDAO pharmacistDAO;
 

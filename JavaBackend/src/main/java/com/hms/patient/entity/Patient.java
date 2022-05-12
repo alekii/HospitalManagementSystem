@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -19,7 +20,6 @@ import java.util.Set;
 
 @Entity
 @Table(name="patients")
-
 public class Patient {
 
     @Id
@@ -39,17 +39,31 @@ public class Patient {
     @ManyToMany(mappedBy = "patients")
     private Set<Doctor> doctors = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "patients", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Medication> medication = new LinkedHashSet<>();
 
     @Column(name="payment_status")
     private PaymentStatus paymentStatus;
-
 
     public Patient(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
+    public void addMedication(Medication medic){
+        medication.add(medic);
+        medic.setPatient(this);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this==obj) return  true;
+        if(!(obj instanceof Patient)) return  false;
+        return Objects.equals(id, ((Patient) obj).getId());
+    }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
 }

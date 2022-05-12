@@ -17,14 +17,14 @@ public class DrugSale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
-    @Column(name="id")
+    @Column(name="drug_id")
     private int drugId;
     @Column(name="drug_cost")
     private double drugCost;
     @Column(name="drug_quantity")
     private int drugQuantity;
     @Column(name="date_sale_made")
-    private final Timestamp dateMadeSale = Timestamp.from(Instant.now());
+    private final Timestamp dateOfSale = Timestamp.from(Instant.now());
 
     //we can generate total on the fly no need to store
 }

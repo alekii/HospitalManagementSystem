@@ -9,10 +9,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/doctors/add")
-public class DoctorController {
+public class DoctorRoleController {
     private final DoctorService doctorService;
 
-    public DoctorController(DoctorService doctorService) {
+    public DoctorRoleController(DoctorService doctorService) {
         this.doctorService = doctorService;
     }
 
@@ -29,7 +29,7 @@ public class DoctorController {
     @PostMapping("/doctors/add")
     public  Doctor addDoctor(@RequestBody Doctor doctor){
         //id is 0 so add
-        doctor.setId(0);
+        doctor.setEmployeeId(0);
         doctorService.save(doctor);
         return doctor;
     }

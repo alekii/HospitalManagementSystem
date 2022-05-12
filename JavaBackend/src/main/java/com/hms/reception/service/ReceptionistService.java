@@ -30,12 +30,12 @@ public class ReceptionistService {
     }
 
     @Transactional
-    public void updatePharmacist(Receptionist receptionist){
+    public void updateReceptionist(Receptionist receptionist){
         receptionistDAO.updateReceptionist(receptionist);
     }
 
     @Transactional
-    public void deletePharmacist(int receptionistId){
+    public void deleteReceptionist(int receptionistId){
         receptionistDAO.deleteReceptionist(receptionistId);
     }
 }

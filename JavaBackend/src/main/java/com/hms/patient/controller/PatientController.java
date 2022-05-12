@@ -2,10 +2,7 @@ package com.hms.patient.controller;
 
 import com.hms.patient.entity.Patient;
 import com.hms.patient.service.PatientService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/patients/")
@@ -16,8 +13,9 @@ public class PatientController {
         this.patientService = patientService;
     }
 
-    @GetMapping("/find/{patientId}")
-    public Patient findPatient(@PathVariable int patientId){
+    @GetMapping("find/{patientId}")
+    public Patient findPatient(@PathVariable int patientId) {
         return patientService.findPatient(patientId);
     }
 }
+

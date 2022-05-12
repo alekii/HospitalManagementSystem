@@ -25,8 +25,8 @@ public class Appointment {
     @Column(name="doctor_id")
     private int doctorID;
 
-    @Column(name="patient_id")
-    private int patientID;
+    @Column(name="patient_name")
+    private String patientName;
 
     @Column(name="appointment_time")
     private Timestamp appointmentTime;

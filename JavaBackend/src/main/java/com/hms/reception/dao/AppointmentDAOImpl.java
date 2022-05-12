@@ -3,10 +3,12 @@ package com.hms.reception.dao;
 import com.hms.reception.entity.Appointment;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Repository
 public class AppointmentDAOImpl implements AppointmentDAO{
     private final EntityManager entityManager;
 
@@ -21,11 +23,11 @@ public class AppointmentDAOImpl implements AppointmentDAO{
     }
 
     @Override
-    public boolean appointmentExists(int doctorId, int patientId) {
+    public boolean appointmentExists(int doctorId, String patientName) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Appointment> findAppointmentQuery = currentSession.createQuery("from Appointment where doctorId=:theDoctorId and patientId=:thePatientId", Appointment.class);
+        Query<Appointment> findAppointmentQuery = currentSession.createQuery("from Appointment where doctorId=:theDoctorId and patientId=:thePatientName", Appointment.class);
         findAppointmentQuery.setParameter("theDoctorId",doctorId);
-        findAppointmentQuery.setParameter("thePatientId", patientId);
+        findAppointmentQuery.setParameter("thePatientName", patientName);
          List<Appointment> results = findAppointmentQuery.getResultList();
          if (results == null) return false;
          boolean exists = false;

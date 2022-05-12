@@ -20,12 +20,17 @@ public class PatientService {
     }
 
     @Transactional
-    public void addMedication(Medication medication){
-       patientDAO.addMedication(medication);
+    public void addMedication(int patientId,Medication medication){
+       patientDAO.addMedication(patientId,medication);
     }
 
     @Transactional
-    public void save(Patient patient){
+    public void updatePatient(Patient patient){
         patientDAO.updatePatient(patient);
+    }
+
+    @Transactional
+    public void addPatient(Patient patient){
+        patientDAO.addPatient(patient);
     }
 }

@@ -19,11 +19,11 @@ public class AppointmentController {
 
     @PostMapping("new")
     public String createAppointment(@RequestBody AppointmentRequest appointmentRequest) {
-        boolean exists = appointmentService.appointmentExists(appointmentRequest.getDoctorId(), appointmentRequest.getPatientId());
+        boolean exists = appointmentService.appointmentExists(appointmentRequest.getDoctorId(), appointmentRequest.getPatientName());
         if (exists) {
             Appointment appointment = new Appointment();
             appointment.setDoctorID(appointmentRequest.getDoctorId());
-            appointment.setPatientID(appointmentRequest.getDoctorId());
+            appointment.setPatientName(appointmentRequest.getPatientName());
             appointment.setAppointmentTime(appointmentRequest.getAppointmentTime());
             appointmentService.createAppointment(appointment);
             return "Appointment made successfully";

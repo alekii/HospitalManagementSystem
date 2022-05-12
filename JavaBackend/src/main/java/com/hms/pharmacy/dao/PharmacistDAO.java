@@ -3,10 +3,12 @@ package com.hms.pharmacy.dao;
 import com.hms.pharmacy.entity.Pharmacist;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Repository
 public class PharmacistDAO {
     private final EntityManager entityManager;
 
@@ -31,7 +33,7 @@ public class PharmacistDAO {
 
     public void updatePharmacist(Pharmacist pharmacist){
         Session session = entityManager.unwrap(Session.class);
-        pharmacist.setId(0);
+        pharmacist.setEmployeeId(0);
         session.save(pharmacist);
     }
 

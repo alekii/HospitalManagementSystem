@@ -3,10 +3,12 @@ package com.hms.reception.dao;
 import com.hms.reception.entity.Receptionist;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Repository
 public class ReceptionistDAO {
     private final EntityManager entityManager;
 
@@ -31,7 +33,7 @@ public class ReceptionistDAO {
 
     public void updateReceptionist(Receptionist receptionist){
         Session session = entityManager.unwrap(Session.class);
-        receptionist.setId(0);
+        receptionist.setEmployeeId(0);
         session.save(receptionist);
     }
 

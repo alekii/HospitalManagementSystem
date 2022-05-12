@@ -3,7 +3,6 @@ package com.hms.patient.entity;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.List;
 
 @Entity
 @Table(name="medication")
