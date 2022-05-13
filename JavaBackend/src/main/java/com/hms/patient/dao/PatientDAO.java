@@ -4,10 +4,9 @@ import com.hms.patient.entity.Medication;
 import com.hms.patient.entity.Patient;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 @Repository
 public class PatientDAO {
@@ -41,4 +40,8 @@ public class PatientDAO {
     }
 
 
+    public Medication getMedication(int patientId) {
+        Session session = entityManager.unwrap(Session.class);
+        return session.get(Medication.class,patientId);
+    }
 }

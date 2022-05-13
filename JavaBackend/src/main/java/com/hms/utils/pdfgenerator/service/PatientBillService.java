@@ -1,7 +1,7 @@
-package com.hms.reception.service;
+package com.hms.utils.pdfgenerator.service;
 
 import com.hms.patient.entity.Patient;
 
-public interface BillService {
+public interface PatientBillService {
     Patient getPatientWithPendingPayment(int patientId);
 }

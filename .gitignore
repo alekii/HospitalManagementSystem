@@ -36,3 +36,30 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Logs
+logs
+*.log
+ReactTsFrontEnd/npm-debug.log*
+ReactTsFrontEnd/yarn-debug.log*
+ReactTsFrontEnd/yarn-error.log*
+ReactTsFrontEnd/pnpm-debug.log*
+ReactTsFrontEnd/lerna-debug.log*
+
+
+ReactTsFrontEnd/node_modules
+ReactTsFrontEnd/dist
+ReactTsFrontEnd/dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

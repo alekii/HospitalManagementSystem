@@ -33,7 +33,7 @@ public class PharmacistDAO {
 
     public void updatePharmacist(Pharmacist pharmacist){
         Session session = entityManager.unwrap(Session.class);
-        pharmacist.setEmployeeId(0);
+        pharmacist.setId(0);
         session.save(pharmacist);
     }
 

@@ -26,8 +26,7 @@ Pharmacist
 Admin
 -View Revenue  
 -add doctor
--no of patients treated 
--no of drugs available
+-no of patients treated  
 -amount used to order drugs
 -add receptionist
 -add pharmacist

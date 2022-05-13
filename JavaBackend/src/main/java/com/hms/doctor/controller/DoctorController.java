@@ -9,7 +9,7 @@ import com.hms.patient.service.PatientService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/employees")
+@RequestMapping("/api/doctor/")
 public class DoctorController {
     private final DoctorService doctorService;
     private final PatientService patientService;
@@ -19,18 +19,13 @@ public class DoctorController {
         this.patientService = patientService;
     }
 
-    @PutMapping("/doctors/update")
-    public  Doctor updateDoctor(@RequestBody Doctor doctor){
-        doctorService.save(doctor);
-        return doctor;
-    }
-    @PutMapping("/patients/update")
+    @PutMapping("patients/update")
     public  String updatePatient(@RequestBody Patient patient){
         patientService.updatePatient(patient);
         return "patient updated successfully";
     }
 
-@PostMapping("/patients/medication/add")
+@PostMapping("patients/medication/add")
     public String AddMedication(@RequestBody MedicationDTO medicationDTO){
         Patient patient = patientService.findPatient(medicationDTO.getPatientId());
         Medication medication = new Medication();

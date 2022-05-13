@@ -1,4 +1,4 @@
-package com.hms.accounts.controller.accounts;
+package com.hms.accounts.controller;
 
 import com.hms.accounts.dto.DrugSaleDTO;
 import com.hms.accounts.dto.TreatmentRevenueDTO;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/revenue/")
+@RequestMapping("/api/admin/revenue/")
 public class RevenueController {
     private final DrugSaleService drugSaleService;
     private final TreatmentRevenueService treatmentRevenueService;
@@ -40,7 +40,7 @@ public class RevenueController {
         return drugSaleService.getDrugSalesBetweenTwoDates(fetchByDate.getFromDate(),fetchByDate.getToDate());
     }
 
-    @GetMapping("treatmentRevenue/find")
+    @GetMapping("treatmentrevenue/find")
     public List<TreatmentRevenueDTO> findTreatmentRevenue(@RequestBody FetchByDate fetchByDate){
         return  treatmentRevenueService.getTreatmentRevenueBetweenTwoDates(fetchByDate.getFromDate(),fetchByDate.getToDate());
     }

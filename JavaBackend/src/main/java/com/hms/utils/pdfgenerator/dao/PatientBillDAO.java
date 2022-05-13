@@ -1,7 +1,7 @@
-package com.hms.reception.dao;
+package com.hms.utils.pdfgenerator.dao;
 
 import com.hms.patient.entity.Patient;
 
-public interface BillDAO {
+public interface PatientBillDAO {
     Patient getPatientWithPendingPayment(int patientID);
 }

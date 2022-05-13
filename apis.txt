@@ -1,0 +1,42 @@
+API
+/api/admin/revenue/
+ drugsale/add 
+ treatment/add
+ drugsales/find
+ treatmentrevenue/find
+
+/api/admin/employees/doctors/
+ find/all
+ doctor/{doctorId}
+ doctors/add
+ doctors/delete/{doctorId}
+ doctor/find/{doctorId}
+ doctors/update
+
+/api/admin/employees/pharmacists/
+ add
+ update
+ find/all
+ find/{pharmacistId}
+ delete/{pharmacistId}
+
+/api/admin/employees/receptionist/
+ add
+ find/all
+ find/{receptionistId}
+ update
+ delete/{receptionistId}
+ 
+/api/patients/
+ find/{patientId}
+ 
+/api/doctor/ 
+ patients/update
+ patients/medication/add
+
+/api/appointment/
+ new
+  
+/api/bill/
+ generate-bill/{patientId}
+ generate-pdf

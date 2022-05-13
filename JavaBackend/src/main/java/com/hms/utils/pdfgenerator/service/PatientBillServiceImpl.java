@@ -1,15 +1,15 @@
-package com.hms.reception.service;
+package com.hms.utils.pdfgenerator.service;
 
 import com.hms.patient.entity.Patient;
-import com.hms.reception.dao.BillDAO;
+import com.hms.utils.pdfgenerator.dao.PatientBillDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class BillServiceImpl implements BillService{
-    private final BillDAO billDAO;
+public class PatientBillServiceImpl implements PatientBillService {
+    private final PatientBillDAO billDAO;
 
-    public BillServiceImpl(BillDAO billDAO) {
+    public PatientBillServiceImpl(PatientBillDAO billDAO) {
         this.billDAO = billDAO;
     }
 

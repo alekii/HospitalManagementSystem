@@ -1,4 +1,4 @@
-package com.hms.reception.dao;
+package com.hms.utils.pdfgenerator.dao;
 
 import com.hms.patient.entity.Patient;
 import org.hibernate.Session;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 
 @Repository
-public class BillDAOImpl implements BillDAO{
+public class PatientBillDAOImpl implements PatientBillDAO {
 
     private final EntityManager entityManager;
 
-    public BillDAOImpl(EntityManager entityManager) {
+    public PatientBillDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

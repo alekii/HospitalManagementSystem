@@ -33,7 +33,7 @@ public class ReceptionistDAO {
 
     public void updateReceptionist(Receptionist receptionist){
         Session session = entityManager.unwrap(Session.class);
-        receptionist.setEmployeeId(0);
+        receptionist.setId(0);
         session.save(receptionist);
     }
 

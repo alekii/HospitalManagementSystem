@@ -25,6 +25,11 @@ public class PatientService {
     }
 
     @Transactional
+    public Medication getMedication(int patientId){
+        return patientDAO.getMedication(patientId);
+    }
+
+    @Transactional
     public void updatePatient(Patient patient){
         patientDAO.updatePatient(patient);
     }
