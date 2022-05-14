@@ -5,9 +5,10 @@ interface careerProps{
 
    }
 
-const HomeBoxes=(props:any)=> {
+const HomeBoxes:careerProps=(items:careerProps)=> {
   return (
-      props.items.map((prop:any)=>{ 
+    items.map((prop:any)=>{
+          return (
             <Box margin="4">
             <Image
               src="/stethescope.jpeg"
@@ -18,7 +19,8 @@ const HomeBoxes=(props:any)=> {
             <Button bg="#5c6865" color="white" w="100%" h="12" fontSize="18px">
               {prop.name} Log In
             </Button>
-          </Box> 
+          </Box>
+          )
       })
    
   )

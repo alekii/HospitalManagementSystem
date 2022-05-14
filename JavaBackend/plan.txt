@@ -37,4 +37,4 @@ Backend one week
 front end one week(REACT)
 Deadline 29th May 2021
 
-search function with LIMIT 
+ search function with LIMIT 
