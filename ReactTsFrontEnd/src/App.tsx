@@ -7,8 +7,14 @@ import Home from "./components/home";
 import Revenue from "./components/admin/revenue";
 import Employees from './components/admin/employees';
 import NotFound from "./components/NotFound";
+import AddNewPatient from "./components/doctor/addnewpatient";
+import Doctor from './components/doctor/doctor';
+import Patient from "./components/doctor/patient";
 import AddNewEmployee from "./components/admin/addnewemployee";
-
+import AddNewPatientMedication from "./components/doctor/addnewpatientmediaction";
+import PatientDetail from './components/doctor/patientdetail';
+import Receptionist from './components/reception/receptionist'; 
+import Pharmacist from "./components/pharmacy/pharmacist";
 export default function App() {
   return (
     <>
@@ -20,8 +26,21 @@ export default function App() {
   
             <Route path="/admin" element={<Admin/>}> 
               <Route path="Revenue" element={<Revenue/>}></Route>
-              <Route path="Employees" element={<Employees/>}>
+              <Route path="Employees" element={<Employees/>}/>
+              <Route path="Employees/:careerName" element={<Employees/>}>
                 <Route path="add" element={<AddNewEmployee/>}/>
+              </Route>
+            </Route>
+            <Route path="Receptionist" element={<Receptionist/>}> 
+            </Route>
+            <Route path=" Pharmacist" element={<Pharmacist/>}>  
+            </Route>
+            <Route path="/doctor" element={<Doctor/>}>
+              <Route path="patients" element={<Patient/>}>
+                <Route path="add" element={<AddNewPatient/>}/>
+                <Route path="details" element={<PatientDetail/>}>
+                  <Route path="medication/add" element={<AddNewPatientMedication/>}/>
+              </Route>
               </Route>
             </Route>
            <Route path="*" element={<NotFound/>}/>

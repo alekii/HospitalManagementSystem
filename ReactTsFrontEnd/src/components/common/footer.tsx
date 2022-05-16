@@ -2,7 +2,7 @@ import { Box,Text } from '@chakra-ui/react'
 
 function Footer() {
   return (
-     <Box h='60px'>
+     <Box h='60px' position='relative'>
          <Text textAlign='center' mt='40px'>© 2022 Hospital Management System </Text>
      </Box>
   )

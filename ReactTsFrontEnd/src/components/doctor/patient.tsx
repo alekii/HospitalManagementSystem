@@ -4,10 +4,10 @@ import { FiSearch } from "react-icons/fi";
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 
-const Employees = () => { 
+const Patient = () => { 
 const jobFunction = useLocation()
 const career = useParams()  
-const linkToAdd = '/admin/Employees/'+career.careerName+'/add'
+const linkToAdd = '/doctor/patients/add'
  
     return (
       <Box ml="100px"> 
@@ -23,13 +23,12 @@ const linkToAdd = '/admin/Employees/'+career.careerName+'/add'
             </FormControl>
           </Box>
          <Link to={linkToAdd}>
-             <Button mr="20" >Add New</Button>
+             <Button mr="20"   >Add New Patient</Button>
          </Link>
-        </Box>
-  
+        </Box> 
        <Outlet/>
       </Box>
     );
   };
 
-  export default Employees;
+  export default Patient;

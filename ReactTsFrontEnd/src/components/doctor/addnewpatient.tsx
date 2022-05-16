@@ -1,6 +1,6 @@
 import { Box, Button, FormControl, FormLabel, Input, Select } from '@chakra-ui/react'
  
-function AddNewEmployee() {
+function AddNewPatient() {
   return (  <Box
     w="50%"
     mt="50px" 
@@ -17,15 +17,11 @@ function AddNewEmployee() {
         <Select id="gender">
           <option>Male</option>
           <option>Female</option>
-        </Select>
-        <FormLabel htmlFor="email">email</FormLabel>
-        <Input id="email" type="email"></Input>
-        <FormLabel htmlFor="speciality">Speciality</FormLabel>
-        <Input id="speciality" type="text"></Input>
+        </Select>  
         <Button type="submit" color="white" _hover={{bg:'#199999'}} bg="#5c6865" mt="8" w='100%'>Submit</Button>
       </FormControl> 
   </Box>
   )
 }
 
-export default AddNewEmployee
+export default AddNewPatient;
