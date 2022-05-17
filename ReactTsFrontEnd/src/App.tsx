@@ -15,6 +15,12 @@ import AddNewPatientMedication from "./components/doctor/addnewpatientmediaction
 import PatientDetail from './components/doctor/patientdetail';
 import Receptionist from './components/reception/receptionist'; 
 import Pharmacist from "./components/pharmacy/pharmacist";
+import PatientBill from "./components/reception/patientbill";
+import Appointments from './components/reception/appointments';
+import SingleBill from "./components/reception/singlebill";
+import AddNewAppointment from "./components/reception/addnewappointment";
+import Drugs from "./components/pharmacy/drugs";
+import Cart from "./components/pharmacy/cart";
 export default function App() {
   return (
     <>
@@ -31,9 +37,18 @@ export default function App() {
                 <Route path="add" element={<AddNewEmployee/>}/>
               </Route>
             </Route>
-            <Route path="Receptionist" element={<Receptionist/>}> 
+            <Route path="Receptionist" element={<Receptionist/>}>
+              <Route path="Appointments" element={<Appointments/>}>
+              <Route path="add" element={<AddNewAppointment/>}/>
+              </Route> 
+              <Route path="Bill" element={<PatientBill/>}>
+                <Route path="view" element={<SingleBill/>}/>
+              </Route> 
             </Route>
-            <Route path=" Pharmacist" element={<Pharmacist/>}>  
+            <Route path="Pharmacist" element={<Pharmacist/>}>  
+                <Route path="Drugs" element={<Drugs/>}>
+                <Route path="cart" element={<Cart/>}/> 
+                </Route> 
             </Route>
             <Route path="/doctor" element={<Doctor/>}>
               <Route path="patients" element={<Patient/>}>

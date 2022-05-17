@@ -6,11 +6,10 @@ import {
 } from "react-icons/fi"; 
 import { Link, Outlet } from "react-router-dom";
 import React from "react"; 
-import LinkItemProps from "./linkitemprops";
+import LinkItemProps from "./common/interface/linkitemprops";
  
 export default function SideBarMenu({LinkItems}: Array<LinkItemProps>){ 
     return (
-      <Flex>
         <Box
           minH="100vh"
           bg={useColorModeValue("white", "gray.900")}
@@ -30,10 +29,7 @@ export default function SideBarMenu({LinkItems}: Array<LinkItemProps>){
             );
           })}
         </Box>
-        <Box ml="250px" mt="4" w="100%">
-          <Outlet />
-        </Box>
-      </Flex>
+        
     );
   }
 
@@ -66,9 +62,10 @@ export default function SideBarMenu({LinkItems}: Array<LinkItemProps>){
         )}
         {rest.childLi && isSubMenuOpen && (
           <Box pb="4" mt="6px" px="4" ml="15%" >
-            {rest.childLi.map((childLink: any,index:number) => {
+            {rest.childLi.map((childLink: any) => {
+                console.log(childLink.link)
               return (
-                <Link to={childLink.link} key={index}>
+                <Link to={childLink.link} key={childLink.linkName}>
                   <Box 
                     py="7px"
                     _hover={{

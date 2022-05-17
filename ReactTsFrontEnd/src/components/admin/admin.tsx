@@ -3,7 +3,9 @@ import {
   FiDollarSign,
   FiUsers,
 } from "react-icons/fi";  
-import LinkItemProps from '../linkitemprops';
+import LinkItemProps from '../common/interface/linkitemprops';
+import { Box, Flex } from '@chakra-ui/react';
+import { Outlet } from 'react-router-dom';
 
 
 const LinkItems: Array<LinkItemProps> = [
@@ -12,8 +14,8 @@ const LinkItems: Array<LinkItemProps> = [
     linkName: "Employees",
     icon: FiUsers,
     childLi: [
+      { linkName: "Doctors", link: "/admin/Employees/doctors" }, 
       { linkName: "Receptionists", link: "/admin/Employees/receptionists" },
-      { linkName: "Doctors", link: "/admin/Employees/doctors" },
       { linkName: "Pharmacists", link: "/admin/Employees/pharmacists" },
     ],
   },
@@ -22,9 +24,13 @@ const LinkItems: Array<LinkItemProps> = [
 
 export default function Admin(){
   return (
-    <SideBarMenu LinkItems={LinkItems} >
-
+    <Flex>
+    <SideBarMenu LinkItems={LinkItems} > 
     </SideBarMenu>
+    <Box ml="250px" mt="4" w="100%">
+      <Outlet/>
+    </Box>
+    </Flex>
   )
 }
  

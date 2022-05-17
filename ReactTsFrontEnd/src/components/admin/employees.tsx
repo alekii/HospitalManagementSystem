@@ -25,8 +25,7 @@ const linkToAdd = '/admin/Employees/'+career.careerName+'/add'
          <Link to={linkToAdd}>
              <Button mr="20" >Add New</Button>
          </Link>
-        </Box>
-  
+        </Box> 
        <Outlet/>
       </Box>
     );

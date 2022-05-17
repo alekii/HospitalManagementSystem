@@ -1,22 +1,27 @@
 import SideBarMenu from '../sidebarmenu'
 import { 
-  FiDollarSign,
-  FiUsers,
+  FiDollarSign, 
 } from "react-icons/fi";  
-import LinkItemProps from '../linkitemprops';
+import LinkItemProps from '../common/interface/linkitemprops';
+import { Box, Flex } from '@chakra-ui/react';
+import { Outlet } from 'react-router-dom';
 
 
 const LinkItems: Array<LinkItemProps> = [ 
-  { linkName: "Sell Drugs", icon: FiUsers }
+  { linkName: "Drugs", icon: FiDollarSign }
   
 ];
 
 
 export default function Pharmacist(){
   return (
-    <SideBarMenu LinkItems={LinkItems} >
-
+    <Flex>
+    <SideBarMenu LinkItems={LinkItems} > 
     </SideBarMenu>
+    <Box ml="250px" mt="4" w="100%">
+      <Outlet/>
+    </Box>
+    </Flex>
   )
 }
  
