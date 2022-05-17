@@ -5,15 +5,20 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 
 const Patient = () => { 
+
+
 const jobFunction = useLocation()
 const career = useParams()  
 const linkToAdd = '/doctor/patients/add'
+const linkToAll = '/doctor/patients/all'
  
     return (
       <Box ml="100px"> 
       <Box as='p' pb='4'>{career.careerName}</Box>
         <Box display="flex" justifyContent="space-between">
+          <Link to={linkToAll}>
           <Button mr="20">Find All</Button>
+          </Link>
           <Box>
             <FormControl display="flex">
               <Input id="searchEmployeee" type="text" w="300px" />

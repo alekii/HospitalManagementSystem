@@ -4,8 +4,7 @@ import { FiSearch } from "react-icons/fi";
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 
-const Employees = () => { 
-const jobFunction = useLocation()
+const Employees = () => {  
 const career = useParams()  
 const linkToAdd = '/admin/Employees/'+career.careerName+'/add'
  

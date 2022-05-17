@@ -3,8 +3,7 @@ import { Box, Button, FormControl, FormLabel, Input, Select } from '@chakra-ui/r
 function AddNewEmployee() {
   return (  <Box
     w="50%"
-    mt="50px" 
-
+    mt="50px"  
   > 
       <FormControl isRequired>
         <FormLabel htmlFor="first-name">First Name</FormLabel>

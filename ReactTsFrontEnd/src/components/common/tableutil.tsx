@@ -1,5 +1,4 @@
-import { FiX } from "react-icons/fi";
-import {
+ import {
   Table,
   TableCaption,
   TableContainer,
@@ -12,11 +11,11 @@ import {
 } from "@chakra-ui/react";
 
 
-function TableUtil({handleClick, heading, bodyvalues, icon }: any) {
+function TableUtil({tablecaption,handleClick, heading, bodyvalues, icon }: any) {
   return (
     <TableContainer>
       <Table variant="striped" colorScheme="teal">
-        <TableCaption>Drugs Shopping Cart</TableCaption>
+        <TableCaption>{tablecaption}</TableCaption>
         <Thead>
           <Tr>
             {heading.map((tableHeading: any, index: number) => {

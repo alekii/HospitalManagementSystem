@@ -10,8 +10,7 @@ import NotFound from "./components/NotFound";
 import AddNewPatient from "./components/doctor/addnewpatient";
 import Doctor from './components/doctor/doctor';
 import Patient from "./components/doctor/patient";
-import AddNewEmployee from "./components/admin/addnewemployee";
-import AddNewPatientMedication from "./components/doctor/addnewpatientmediaction";
+import AddNewEmployee from "./components/admin/addnewemployee"; 
 import PatientDetail from './components/doctor/patientdetail';
 import Receptionist from './components/reception/receptionist'; 
 import Pharmacist from "./components/pharmacy/pharmacist";
@@ -21,6 +20,9 @@ import SingleBill from "./components/reception/singlebill";
 import AddNewAppointment from "./components/reception/addnewappointment";
 import Drugs from "./components/pharmacy/drugs";
 import Cart from "./components/pharmacy/cart";
+import FindAllPatients from "./components/doctor/findallpatients";
+import FindAllAppointments from './components/reception/findallappointments';
+import FindPatientBill from "./components/reception/findpatientbill";
 export default function App() {
   return (
     <>
@@ -40,9 +42,11 @@ export default function App() {
             <Route path="Receptionist" element={<Receptionist/>}>
               <Route path="Appointments" element={<Appointments/>}>
               <Route path="add" element={<AddNewAppointment/>}/>
+                <Route path="all" element={<FindAllAppointments/>}/>
               </Route> 
               <Route path="Bill" element={<PatientBill/>}>
                 <Route path="view" element={<SingleBill/>}/>
+                <Route path="find" element={<FindPatientBill/>}/>
               </Route> 
             </Route>
             <Route path="Pharmacist" element={<Pharmacist/>}>  
@@ -53,9 +57,9 @@ export default function App() {
             <Route path="/doctor" element={<Doctor/>}>
               <Route path="patients" element={<Patient/>}>
                 <Route path="add" element={<AddNewPatient/>}/>
+                <Route path="all" element={<FindAllPatients/>}/>
                 <Route path="details" element={<PatientDetail/>}>
-                  <Route path="medication/add" element={<AddNewPatientMedication/>}/>
-              </Route>
+               </Route>
               </Route>
             </Route>
            <Route path="*" element={<NotFound/>}/>

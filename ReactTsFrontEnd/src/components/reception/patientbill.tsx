@@ -5,6 +5,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 const PatientBill = () => {  
 const linkToAdd = '/doctor/patients/add'
+const linkToFindPatient = '/Receptionist/Bill/find'
  
     return (
       <Box ml="100px">  
@@ -12,9 +13,11 @@ const linkToAdd = '/doctor/patients/add'
           <Box>
             <FormControl display="flex">
               <Input id="searchPatientBill" type="text" w="300px" placeholder="Search Patient by name" />
-              <Button borderLeftRadius="0" w="50px" type="submit">
+             <Link to={linkToFindPatient}> 
+             <Button borderLeftRadius="0" w="50px" type="submit">
                 <FiSearch />
               </Button>
+             </Link> 
             </FormControl>
           </Box> 
              <Button mr="20" >Print</Button> 

@@ -6,7 +6,7 @@ import {
 } from "react-icons/fi"; 
 import { Link, Outlet } from "react-router-dom";
 import React from "react"; 
-import LinkItemProps from "./common/interface/linkitemprops";
+import LinkItemProps from "./linkitemprops";
  
 export default function SideBarMenu({LinkItems}: Array<LinkItemProps>){ 
     return (

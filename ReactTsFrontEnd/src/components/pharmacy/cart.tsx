@@ -13,7 +13,8 @@ const TableItems: Array<TableProps> = [
             ['Aspirin','200','3',600],
             ['Mara Moja', '3', '10', 30],
         ],
-        icon:FiX
+        icon:FiX,
+        tablecaption:'Drugs Shopping Cart'
     },
 ]
 
@@ -32,7 +33,7 @@ function Cart() {
 
     return (
         <Box w="80%" margin='50px 0 0 0'>
-            <TableUtil handleClick={removeItem} icon={TableItems[0].icon} heading={TableItems[0].heading} bodyvalues={TableItems[0].bodyvalues}></TableUtil>
+            <TableUtil tablecaption={TableItems[0].tablecaption} handleClick={removeItem} icon={TableItems[0].icon} heading={TableItems[0].heading} bodyvalues={TableItems[0].bodyvalues}></TableUtil>
             <Box as='p' textAlign='end' fontSize='17px'><strong>Total: </strong>Kshs {totalAmount}</Box>
         </Box>
     );

@@ -3,13 +3,17 @@ import { Box, Button,FormControl,Input} from "@chakra-ui/react";
 import { Link, Outlet } from 'react-router-dom';
 
 
-const Appointments = () => {  
+const linkToAll = '/Receptionist/Appointments/all'
 const linkToAdd = '/Receptionist/Appointments/add'
+
+const Appointments = () => {  
  
     return (
       <Box ml="100px">  
         <Box display="flex" justifyContent="space-between">
+          <Link to={linkToAll}>
           <Button mr="20">Find All</Button>
+          </Link>
           <Box>
             <FormControl display="flex">
               <Input id="searchAppointment" type="text" w="300px" placeholder="Search Patient"/>
