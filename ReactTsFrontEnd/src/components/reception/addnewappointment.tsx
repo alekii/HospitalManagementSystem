@@ -1,21 +1,55 @@
-import { Box, Button, FormControl, FormLabel, Input, Select } from '@chakra-ui/react'
- 
+import {
+  Box, 
+} from "@chakra-ui/react"; 
+import Form from "../common/form";
+import FormProps from "./../common/interface/formprops";
+
+const doctors = [
+  {name:"Doctor one", room:"Lab"},
+  {name:"Doctor two", room:"Clinic"},
+  {name:"Doctor three", room:"Emergency"},
+  {name:"Doctor four", room:"Nutririon"},
+]
+
+const FormItems: Array<FormProps> = [
+  {
+    input: [
+      { id: "name", type: "text", label: "Customer Name" }, 
+    ],
+    select: [
+      { id: "room",label:"Room",options:  [] }, 
+    ], 
+  },
+   
+];
+
+const rooms:string[] = [] 
+
+doctors.map(d=>{
+  rooms.push(d.room)
+})
+
+FormItems.map((f:any)=>{
+   f.select[0].options = rooms;
+})
+
 function AddNewAppointment() {
+
+  function getFormData(values:any){ 
+    return new Promise<void>((resolve)=>{
+        setTimeout(()=>{
+            console.log(JSON.stringify(values,null,2))
+            resolve()
+        },100)
+    })
+  }
+
   return (  <Box
     w="50%"
-    mt="50px" 
-
+    mt="50px"  
   > 
-      <FormControl isRequired>
-        <FormLabel htmlFor="name">Customer Name</FormLabel>
-        <Input id="name" type="text"/> 
-        <FormLabel htmlFor="doctor">Doctor</FormLabel>
-        <Select id="doctor">
-          <option>Doctor one</option>
-          <option>Doctor two</option>
-        </Select> 
-        <Button type="submit" color="white" _hover={{bg:'#199999'}} bg="#5c6865" mt="8" w='100%'>Save Appointment</Button>
-      </FormControl> 
+        <Form onSubmit={getFormData} input={FormItems[0].input} select={FormItems[0].select}></Form>
+    
   </Box>
   )
 }
