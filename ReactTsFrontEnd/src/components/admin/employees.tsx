@@ -6,13 +6,13 @@ import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 const Employees = () => {  
 const career = useParams()  
-const linkToAdd = '/admin/Employees/'+career.careerName+'/add'
+const jobFunction = career.careerName
+const linkToAdd = '/admin/Employees/'+jobFunction+'/add'
  
     return (
-      <Box ml="100px"> 
-      <Box as='p' pb='4'>{career.careerName}</Box>
+      <Box ml="100px">  
         <Box display="flex" justifyContent="space-between">
-          <Button mr="20">Find All</Button>
+          <Button mr="20">Find All {jobFunction}</Button>
           <Box>
             <FormControl display="flex">
               <Input id="searchEmployeee" type="text" w="300px" />
@@ -21,8 +21,8 @@ const linkToAdd = '/admin/Employees/'+career.careerName+'/add'
               </Button>
             </FormControl>
           </Box>
-         <Link to={linkToAdd}>
-             <Button mr="20" >Add New</Button>
+         <Link to={linkToAdd} state={jobFunction}>
+             <Button mr="20" >Add New </Button>
          </Link>
         </Box> 
        <Outlet/>

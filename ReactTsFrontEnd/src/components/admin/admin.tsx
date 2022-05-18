@@ -1,4 +1,4 @@
- import SideBarMenu from '../sidebarmenu'
+ import SideBarMenu from '../common/sidebarmenu'
 import { 
   FiDollarSign,
   FiUsers,
@@ -14,15 +14,15 @@ const LinkItems: Array<LinkItemProps> = [
     linkName: "Employees",
     icon: FiUsers,
     childLi: [
-      { linkName: "Doctors", link: "/admin/Employees/doctors" }, 
-      { linkName: "Receptionists", link: "/admin/Employees/receptionists" },
-      { linkName: "Pharmacists", link: "/admin/Employees/pharmacists" },
+      { linkName: "Doctors", link: "/admin/Employees/Doctors" }, 
+      { linkName: "Receptionists", link: "/admin/Employees/Receptionists" },
+      { linkName: "Pharmacists", link: "/admin/Employees/Pharmacists" },
     ],
   },
 ];
 
 
-export default function Admin(){
+export default function Admin(){ 
   return (
     <Flex>
     <SideBarMenu LinkItems={LinkItems} > 

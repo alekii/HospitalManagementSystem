@@ -1,9 +1,9 @@
-import SideBarMenu from '../sidebarmenu'
+import SideBarMenu from '../common/sidebarmenu'
 import { 
   FiDollarSign,
   FiUsers,
 } from "react-icons/fi";  
-import LinkItemProps from '../linkitemprops';
+import LinkItemProps from '../common/interface/linkitemprops';
 import { Box, Flex } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 

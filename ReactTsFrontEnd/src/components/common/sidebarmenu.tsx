@@ -4,7 +4,7 @@ import {
   FiChevronDown,
   FiChevronRight, 
 } from "react-icons/fi"; 
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink,  } from "react-router-dom";
 import React from "react"; 
 import LinkItemProps from "./linkitemprops";
  
@@ -56,22 +56,25 @@ export default function SideBarMenu({LinkItems}: Array<LinkItemProps>){
             subMenuOpen={isSubMenuOpen}
           ></ListElement>
         ) : (
-          <Link to={children}>
+          <NavLink to={children} 
+          style={({isActive})=>({color:isActive?"blue":"black"})}>
             <ListElement icon={icon} elName={children}></ListElement>
-          </Link>
+          </NavLink>
         )}
         {rest.childLi && isSubMenuOpen && (
           <Box pb="4" mt="6px" px="4" ml="15%" >
-            {rest.childLi.map((childLink: any) => {
-                console.log(childLink.link)
+            {rest.childLi.map((childLink: any) => { 
               return (
-                <Link to={childLink.link} key={childLink.linkName}>
+                <NavLink to={childLink.link} 
+                key={childLink.linkName} 
+                style={({isActive})=>({color:isActive?"blue":"black"})}>
                   <Box 
                     py="7px"
                     _hover={{
                       bg: "#c5c6c7",
                       color: "white",
                     }}
+                     
                     borderRadius="lg"
                     display="flex"
                     alignItems='center'  
@@ -84,7 +87,7 @@ export default function SideBarMenu({LinkItems}: Array<LinkItemProps>){
                       float="right" 
                     ></Icon>
                   </Box>
-                </Link>
+                </NavLink>
               );
             })}
           </Box>

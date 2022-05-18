@@ -3,22 +3,31 @@
 } from "@chakra-ui/react"; 
 import Form from "../common/form";
 import FormProps from "./../common/interface/formprops";
+import { useLocation } from 'react-router-dom';
 
+function AddNewEmployee() { 
 const FormItems: Array<FormProps> = [
   {
     input: [
       { id: "first-name", type: "text", label: "First Name" },
       { id: "last-name", type: "text", label: "Last Name" },
       { id: "age", type: "text", label: "Age" },
-      { id: "email", type: "email", label: "Email" },
-      { id: "speciality", type: "text", label: "Speciality" },
+      { id: "email", type: "email", label: "Email" }, 
     ],
     
-    select: [{ id: "gender",label:"Gender",options: ["Male", "Female"] }],
+    select: [
+      { id: "gender",label:"Gender",options: ["Male", "Female"] }, 
+  ],
   },
    
 ];
-function AddNewEmployee() {
+ 
+ const location = useLocation()  
+ if(location.state==='Doctors'){ 
+   FormItems[0].input?.push({ id: "speciality", type: "text", label: "Speciality" })
+   FormItems[0].select?.push({ id: "room",label:"Assign Room",options: ["Room1", "Room 2"] })
+  
+  }
 
   function getFormData(values:any){ 
     return new Promise<void>((resolve)=>{

@@ -12,7 +12,9 @@ const FormItems: Array<FormProps> = [
       { id: "age", type: "text", label: "Age" },
     ],
     
-    select: [{ id: "gender",label:"Gender",options: ["Male", "Female"] }],
+    select: [
+    { id: "gender",label:"Gender",options: ["Male", "Female"] },
+  ]
   },
    
 ];
@@ -23,7 +25,7 @@ function getFormData(values:any){
       setTimeout(()=>{
           console.log(JSON.stringify(values,null,2))
           resolve()
-      },100)
+      },5000)
   })
 }
 

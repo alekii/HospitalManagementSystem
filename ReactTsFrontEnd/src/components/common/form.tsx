@@ -38,6 +38,7 @@ const Form = ({ input,select,onSubmit}: any) => {
             )}
     </FormControl>
       <Button 
+      isLoading={isSubmitting}
         type="submit"
         color="white"
         _hover={{ bg: "#199999" }}
