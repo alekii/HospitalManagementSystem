@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin/employees/doctors/")
-@PreAuthorize("hasAuthority('ADMIN')")
 public class DoctorRoleController {
     private final DoctorService doctorService;
 
@@ -24,22 +23,8 @@ public class DoctorRoleController {
     }
 
     @GetMapping("find/all")
-    public List<List<String>> findAll(){
-        List<Doctor> doctors = doctorService.findAll();
-        List<List<String>> responseList = new ArrayList<>();
-        doctors.forEach(d->{
-             List<String> g = new ArrayList<>();
-             g.add(d.getFirstName());
-             g.add(d.getLastName());
-             g.add(String.valueOf(d.getAge()));
-            g.add(d.getGender().name());
-            g.add(d.getEmail());
-            g.add(d.getSpeciality());
-             g.add(d.getRoom());
-            responseList.add(g);
-        });
-
-        return responseList;
+    public List<Doctor> findAll(){
+        return doctorService.findAll();
     }
 
     @GetMapping("find/{doctorId}")

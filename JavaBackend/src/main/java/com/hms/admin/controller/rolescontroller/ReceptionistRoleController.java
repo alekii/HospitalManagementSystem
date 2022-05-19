@@ -2,12 +2,14 @@ package com.hms.admin.controller.rolescontroller;
 
 import com.hms.reception.entity.Receptionist;
 import com.hms.reception.service.ReceptionistService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/employees/receptionist/")
+@RequestMapping("/api/admin/employees/receptionists/")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class ReceptionistRoleController {
     private final ReceptionistService receptionistService;
 

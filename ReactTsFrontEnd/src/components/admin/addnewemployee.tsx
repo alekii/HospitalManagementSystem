@@ -24,7 +24,9 @@ const FormItems: Array<FormProps> = [
    
 ];
  
- const location = useLocation()  
+ const location = useLocation() 
+ const jobFunction = location.state 
+ const jobFunctionLowerCase = jobFunction.toLowerCase()
  if(location.state==='Doctors'){ 
    FormItems[0].input?.push({ id: "speciality", type: "text", label: "Speciality" })
    FormItems[0].select?.push({ id: "room",label:"Assign Room",options: ["Room1", "Room 2"] })
@@ -32,9 +34,8 @@ const FormItems: Array<FormProps> = [
   } 
 
   async function getFormData(values:any){ 
-      const endPoint = config.apiEndpoint+'/admin/employees/doctors/add';
-      const res = httpService.post(endPoint, values)
-      console.log(res)
+      const endPoint = config.apiEndpoint+'/admin/employees/'+jobFunctionLowerCase+'/add';
+      const res = httpService.post(endPoint, values) 
       console.log(JSON.stringify(values,null,2))
       
   }

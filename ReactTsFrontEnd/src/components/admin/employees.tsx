@@ -1,12 +1,20 @@
 import { Box, Button, createRenderToast, FormControl,Input} from "@chakra-ui/react"; 
 import React from "react";
 import { FiSearch } from "react-icons/fi";
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 
 const Employees = () => {  
 const career = useParams()  
 const jobFunction = career.careerName
+const navigate = useNavigate();
+
+const allowedUrls = ["Doctors", "Receptionists", "Pharmacists"]
+
+let index = allowedUrls.indexOf(jobFunction)
+console.log(index)
+if(index===-1) navigate("/pagenotfound")
+
 const linkToAdd = '/admin/Employees/'+jobFunction+'/add'
 const linkTofindAllEmployeesByJobFunction = '/admin/Employees/'+jobFunction+'/find/all'
  

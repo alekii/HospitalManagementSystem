@@ -2,12 +2,14 @@ package com.hms.admin.controller.rolescontroller;
 
 import com.hms.pharmacy.entity.Pharmacist;
 import com.hms.pharmacy.service.PharmacistService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin/employees/pharmacists/")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class PharmacistRoleController {
     private final PharmacistService pharmacistService;
 
@@ -35,7 +37,6 @@ public class PharmacistRoleController {
     @GetMapping("find/{pharmacistId}")
     public Pharmacist findById(@PathVariable int pharmacistId){
          return pharmacistService.findPharmacistById(pharmacistId);
-
     }
 
     @DeleteMapping("delete/{pharmacistId}")
