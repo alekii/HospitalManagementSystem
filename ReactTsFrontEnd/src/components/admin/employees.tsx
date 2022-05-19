@@ -8,11 +8,14 @@ const Employees = () => {
 const career = useParams()  
 const jobFunction = career.careerName
 const linkToAdd = '/admin/Employees/'+jobFunction+'/add'
+const linkTofindAllEmployeesByJobFunction = '/admin/Employees/'+jobFunction+'/find/all'
  
     return (
       <Box ml="100px">  
         <Box display="flex" justifyContent="space-between">
+          <Link to={linkTofindAllEmployeesByJobFunction} state={jobFunction}>
           <Button mr="20">Find All {jobFunction}</Button>
+          </Link>
           <Box>
             <FormControl display="flex">
               <Input id="searchEmployeee" type="text" w="300px" />

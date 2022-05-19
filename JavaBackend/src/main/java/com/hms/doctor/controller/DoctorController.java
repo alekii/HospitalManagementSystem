@@ -6,10 +6,12 @@ import com.hms.patient.entity.Medication;
 import com.hms.doctor.service.DoctorService;
 import com.hms.patient.entity.Patient;
 import com.hms.patient.service.PatientService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/doctor/")
+@PreAuthorize("hasAuthority('DOCTOR')")
 public class DoctorController {
     private final DoctorService doctorService;
     private final PatientService patientService;

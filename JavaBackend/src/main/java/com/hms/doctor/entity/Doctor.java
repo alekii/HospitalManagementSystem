@@ -1,22 +1,24 @@
 package com.hms.doctor.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hms.common.model.Employee;
 import com.hms.common.model.Gender;
 import com.hms.patient.entity.Patient;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
+@ToString
 
 @Entity
 @Table(name="doctors")
@@ -37,18 +39,33 @@ public class Doctor extends Employee {
     private int age;
     @Column(name="gender")
     private Gender gender;
+    @JsonIgnore
     @Column(name="date_registered")
-    private Date dateRegistered;
+    private Timestamp dateRegistered = Timestamp.from(Instant.now());
 
     @Column(name = "speciality")
     private String Speciality;
+
+    @Column(name = "room")
+    private String Room;
 
     //avoid chain deletion
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
             @JoinTable(name="doctor_patients",
                     joinColumns = {@JoinColumn(name="doctor_id")},
                     inverseJoinColumns ={@JoinColumn(name="patient_id")})
+    @JsonIgnore
     Set<Patient> patients = new LinkedHashSet<>();
+
+    public Doctor(String firstName, String lastName, int age, String email, String speciality, Gender gender, String room){
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.age=age;
+        this.email=email;
+        this.Speciality =speciality;
+        this.gender=gender;
+        this.Room=room;
+    }
 
     public void addPatient(Patient patient) {
          patients.add(patient);

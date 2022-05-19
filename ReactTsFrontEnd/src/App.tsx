@@ -23,11 +23,16 @@ import Cart from "./components/pharmacy/cart";
 import FindAllPatients from "./components/doctor/findallpatients";
 import FindAllAppointments from './components/reception/findallappointments';
 import FindPatientBill from "./components/reception/findpatientbill";
+import Login from "./components/auth/login"; 
+
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import FindAllEmployeesByCareerName from "./components/admin/findAll";
 export default function App() {
   return (
     <>
       <Box minW="1200px">
-        <Header></Header>
+        <Header></Header> 
         <Box pt="16"> 
           <Routes> 
             <Route path="/" element={<Home/>}/>
@@ -37,6 +42,10 @@ export default function App() {
               <Route path="Employees" element={<Employees/>}/>
               <Route path="Employees/:careerName" element={<Employees/>}>
                 <Route path="add" element={<AddNewEmployee/>}/>
+                <Route path="find">
+                  <Route path="all" element={<FindAllEmployeesByCareerName/>}/>
+                </Route>
+                <Route path="find" element={<AddNewEmployee/>}/>
               </Route>
             </Route>
             <Route path="Receptionist" element={<Receptionist/>}>
@@ -62,6 +71,9 @@ export default function App() {
                </Route>
               </Route>
             </Route>
+            <Route path="/auth">
+               <Route path="login/:careerName" element={<Login/>}/> 
+            </Route> 
            <Route path="*" element={<NotFound/>}/>
           </Routes>
         </Box>

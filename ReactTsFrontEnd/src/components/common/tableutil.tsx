@@ -24,7 +24,7 @@ function TableUtil({tablecaption,handleClick, heading, bodyvalues, icon }: any) 
           </Tr>
         </Thead>
         <Tbody>
-          {bodyvalues.map((tableBody: any, index: number) => { 
+          {bodyvalues.map((tableBody: any, index: number) => {  
             return (
               <Tr key={index}>
                 {tableBody.map((value: any, key: number) => { 
