@@ -10,6 +10,8 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {
@@ -26,10 +28,9 @@ public class JwtUtil {
     }
 
     public Boolean verifyJWT(String jwtToken){
-        System.out.println(jwtToken);
         try{
             Jwts.parser()
-                    .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+                    .setSigningKey(SECRET_KEY)
                     .parseClaimsJws(jwtToken).getBody().getSubject();
             return true;
         } catch(SignatureException | ExpiredJwtException |MalformedJwtException|UnsupportedJwtException|IllegalArgumentException e){
@@ -39,18 +40,22 @@ public class JwtUtil {
     }
 
     public String generateJwt(Authentication authentication) {
+
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         User user = (User) authentication.getPrincipal();
+        String authorities = user.getAuthorities()
+                .stream()
+                .map(grantedAuthority -> grantedAuthority.getAuthority())
+                .collect(Collectors.joining(","));
         long dateNow = new Date().getTime();
         long expirationDateInms = dateNow+EXPIRATION_TIME_MS;
-        byte[] apiKeyBytes = DatatypeConverter.parseBase64Binary(SECRET_KEY);
-        Key signingKey = new SecretKeySpec(apiKeyBytes,signatureAlgorithm.getJcaName());
 
         JwtBuilder jwtBuilder = Jwts.builder()
                 .setSubject(user.getUsername())
+                .claim("role",authorities)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(expirationDateInms))
-                .signWith(signatureAlgorithm,signingKey);
+                .signWith(signatureAlgorithm,SECRET_KEY);
         return jwtBuilder.compact();
     }
 }

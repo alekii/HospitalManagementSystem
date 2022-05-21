@@ -1,4 +1,6 @@
 {
-    "apiEndpoint":"http://localhost:8080/api"
+    "apiEndpoint":"http://localhost:8080/api",
+    "authEndpoint":"http://localhost:8080/auth/login",
+    "signUpEndpoint":"http://localhost:8080/auth/signup"
 }
 

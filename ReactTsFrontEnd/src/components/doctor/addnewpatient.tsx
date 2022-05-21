@@ -1,14 +1,16 @@
 import {
   Box, 
 } from "@chakra-ui/react"; 
+import config from "../../config/config.json";
+import httpService from "../../service/httpService";
 import Form from "../common/form";
 import FormProps from "./../common/interface/formprops";
 
 const FormItems: Array<FormProps> = [
   {
     input: [
-      { id: "first-name", type: "text", label: "First Name" },
-      { id: "last-name", type: "text", label: "Last Name" },
+      { id: "firstName", type: "text", label: "First Name" },
+      { id: "lastName", type: "text", label: "Last Name" },
       { id: "age", type: "text", label: "Age" },
     ],
     
@@ -20,13 +22,10 @@ const FormItems: Array<FormProps> = [
 ];
 function AddNewPatient() {
 
-function getFormData(values:any){ 
-  return new Promise<void>((resolve)=>{
-      setTimeout(()=>{
-          console.log(JSON.stringify(values,null,2))
-          resolve()
-      },5000)
-  })
+async function getFormData(values:any){ 
+  const endPoint = config.apiEndpoint+'/doctor/patients/add'
+  const res = await httpService.post(endPoint,values)
+  console.log(res)
 }
 
   return (

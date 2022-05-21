@@ -18,10 +18,8 @@ import java.sql.Date;
 @Entity
     @Table(name="pharmacists")
     public class Pharmacist{
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int Id;
+    @Id
+    private int Id;
 
     @Email
     @Column(name = "email")

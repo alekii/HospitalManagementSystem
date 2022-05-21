@@ -2,14 +2,15 @@ import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 interface CareerLoginProps{
+  careerLogin:string;
   careerName:string;
   imgUrl:string;
 }
 
 const careerLoginItems:Array<CareerLoginProps> = [
-  {careerName:"Receptionist", imgUrl:"cc1.jpg"},
-  {careerName:"Doctor", imgUrl:"/stethescope.jpeg"},
-  {careerName:"Pharmacist",imgUrl:"/drugs.jpeg"}
+  {careerLogin:"/auth/login/receptionist",careerName:"Receptionist", imgUrl:"cc1.jpg"},
+  {careerLogin:"/auth/login/doctor",careerName:"Doctor", imgUrl:"/stethescope.jpeg"},
+  {careerLogin:"/auth/login/pharmacist",careerName:"Pharmacist",imgUrl:"/drugs.jpeg"}
 ]
 
 const Home=() =>{
@@ -42,6 +43,7 @@ const Home=() =>{
          {careerLoginItems.map(item=>{
            return(
              <CareerLoginCard 
+               careerLogin={item.careerLogin}
                key={item.careerName}
                 careerName={item.careerName}
                 imgUrl={item.imgUrl}> 
@@ -56,8 +58,8 @@ const Home=() =>{
 
 export default Home;
 
- 
-const CareerLoginCard = ({careerName,imgUrl}:CareerLoginProps) =>{
+
+const CareerLoginCard = ({careerLogin,careerName,imgUrl}:CareerLoginProps) =>{
    return(
   <Box margin="4" zIndex='3'>
   <Image
@@ -66,7 +68,7 @@ const CareerLoginCard = ({careerName,imgUrl}:CareerLoginProps) =>{
     h="300px"
     w="350px"
   />
- <Link to={careerName}>
+ <Link to={careerLogin}>
   <Button _hover={{bg:'#199999'}} bg="#5c6865" color="white" w="100%" h="12" fontSize="18px">
   {careerName} Log In
   </Button>

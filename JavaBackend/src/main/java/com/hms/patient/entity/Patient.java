@@ -42,7 +42,7 @@ public class Patient {
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<Medication> medication = new LinkedHashSet<>();
 
-    @Column(name="payment_status")
+    @Column(name="payment_status",  columnDefinition = "int default '0'")
     private PaymentStatus paymentStatus;
 
     public Patient(String firstName, String lastName) {

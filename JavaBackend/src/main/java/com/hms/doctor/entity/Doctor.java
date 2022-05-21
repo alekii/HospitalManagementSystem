@@ -25,7 +25,6 @@ import lombok.*;
 public class Doctor extends Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
     @Email

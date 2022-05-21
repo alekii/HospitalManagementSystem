@@ -31,16 +31,17 @@ public class SignUp {
     public ResponseEntity<?> signup(@RequestBody SignupRequest request) {
         UserData user = new UserData(request.getUsername(), passwordEncoder.encode(request.getPassword()));
 
+        if (userRepository.existsByUsername(request.getUsername())) {
+            return ResponseEntity.badRequest()
+                    .body(new MessageResponse("username exists"));
+        }
+
         List<String> rolefromRequest = request.getRole();
         Set<Role> roles = new LinkedHashSet<>() {
         };
         for(String role : rolefromRequest){
              switch(role){
                  case "admin":
-                     if (userRepository.existsByUsername(request.getUsername())) {
-                     return ResponseEntity.badRequest()
-                             .body(new MessageResponse("username exists"));
-                 }
                      Role adminRole = roleRepository.findByRolename(RoleEnum.ADMIN)
                              .orElseThrow(() -> new RuntimeException("error"));
                      roles.add(adminRole);
@@ -60,6 +61,6 @@ public class SignUp {
 
         user.setRole(roles);
         userRepository.save(user);
-        return ResponseEntity.ok().body(new MessageResponse("Sign Up Success"));
+        return ResponseEntity.ok().body(new MessageResponse(user.getUsername()));
     }
 }

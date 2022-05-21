@@ -1,8 +1,9 @@
 import { Box, useColorModeValue, Flex, VStack,Text, HStack, MenuList, MenuItem, useColorMode, Menu, MenuButton } from "@chakra-ui/react";
+import React from "react";
 import { FiChevronDown } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Header() {
+const Header=({userProfile, signOut}:any)=> { 
   return (
     <Box
       bg="teal"
@@ -23,6 +24,7 @@ function Header() {
         > 
           Admin
         </Button> */}
+        {userProfile.username!=='' &&
         <Menu>
         <MenuButton 
           position="absolute"
@@ -31,8 +33,8 @@ function Header() {
           mr='12'>
         <HStack >
         <VStack  spacing='1px' alignItems='flex-start' color='#f3f4f5'>
-          <Text fontSize='sm'>User 1</Text>
-          <Text fontSize='xs'>Admin</Text>
+          <Text fontSize='sm'>{userProfile.username}</Text>
+          <Text fontSize='xs'>{userProfile.role}</Text>
         </VStack>
         <Box >
           <FiChevronDown color="f3f4f5"/>
@@ -43,9 +45,10 @@ function Header() {
              bg={useColorModeValue('white', 'gray.900')}
              borderColor={useColorModeValue('gray.200','gray.700')}
              >
-          <Link to="/"><MenuItem>Sign out</MenuItem></Link>
+          <MenuItem onClick={signOut}>Sign out</MenuItem>
         </MenuList>
         </Menu>
+}
       </Flex> 
     </Box>
   );

@@ -20,6 +20,7 @@ export default function SideBarMenu({LinkItems}: Array<LinkItemProps>){
           h="full"
           pt="4"
           cursor="pointer"
+          zIndex='100'
         >
           {LinkItems.map((link:any) => {
             return (

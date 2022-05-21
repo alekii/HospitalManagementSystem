@@ -1,25 +1,27 @@
 package com.hms.admin.controller.rolescontroller;
 
 import com.hms.admin.requests.DoctorRequest;
-import com.hms.admin.response.DoctorFindAllResponse;
+import com.hms.auth.services.UserDetailsServiceImpl;
 import com.hms.common.model.Gender;
 import com.hms.doctor.entity.Doctor;
 import com.hms.doctor.service.DoctorService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin/employees/doctors/")
+@PreAuthorize("hasAuthority('ADMIN')")
 public class DoctorRoleController {
     private final DoctorService doctorService;
 
-    public DoctorRoleController(DoctorService doctorService) {
+    private final UserDetailsServiceImpl userDetailsService;
+
+    public DoctorRoleController(DoctorService doctorService, UserDetailsServiceImpl userDetailsService) {
         this.doctorService = doctorService;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("find/all")
@@ -27,16 +29,19 @@ public class DoctorRoleController {
         return doctorService.findAll();
     }
 
-    @GetMapping("find/{doctorId}")
+    @GetMapping("find/{doctorUsername}")
     public Doctor findDoctor(@PathVariable int doctorId){
         return doctorService.findById(doctorId);
     }
 
     @PostMapping("add")
-    public  Doctor addDoctor(@RequestBody DoctorRequest doctorRequest){
-        System.out.println(doctorRequest.toString());
+    public  String addDoctor(@RequestBody DoctorRequest doctorRequest){
+        //find user
+        int userId = userDetailsService.getUserId(doctorRequest.getUserName());
+        if (userId == 0) return ("Username already exists, please choose another username");
         //id is 0 so add
         Doctor doctor = new Doctor();
+        doctor.setId(userId);
         doctor.setFirstName(doctorRequest.getFirstName());
         doctor.setLastName(doctorRequest.getLastName());
         doctor.setAge(doctorRequest.getAge());
@@ -48,7 +53,7 @@ public class DoctorRoleController {
         doctor.setRoom(doctorRequest.getRoom());
         System.out.println(doctor.toString());
          doctorService.save(doctor);
-        return doctor;
+        return "doctor added successfully";
     }
     @PutMapping("doctors/update")
     public  Doctor updateDoctor(@RequestBody Doctor doctor){

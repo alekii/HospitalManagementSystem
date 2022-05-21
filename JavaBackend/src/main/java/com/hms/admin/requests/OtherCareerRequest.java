@@ -8,13 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 
-public class DoctorRequest {
+public class OtherCareerRequest {
     private  String userName;
     private String firstName;
     private String lastName;
     private int age;
     private String email;
-    private String speciality;
     private String gender;
-    private String room;
 }

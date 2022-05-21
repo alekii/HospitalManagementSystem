@@ -21,8 +21,8 @@ import java.sql.Date;
 public class Receptionist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
+
     @Email
     @Column(name = "email")
     private String email;

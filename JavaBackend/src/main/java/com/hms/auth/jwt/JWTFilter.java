@@ -30,15 +30,20 @@ public class JWTFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
            try{
                //get jwt token from request header
-               String AuthToken = request.getHeader("Authorization");
-              if(AuthToken!=null ) {
-                  //get user identity
-                  UserDetails userDetails = userDetailsService.loadUserByUsername(jwtUtil.generateUsernameFromToken((AuthToken)));
-                  //set user identity in security context
+               String authToken = request.getHeader("Authorization");
+              if(authToken!=null ) {
 
-                  UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                  authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                  SecurityContextHolder.getContext().setAuthentication(authentication);
+                  //My impl - first verify jwt
+                  Boolean jwtIsVerified = jwtUtil.verifyJWT(authToken);
+                  if (jwtIsVerified) {
+                      //get user identity
+                      UserDetails userDetails = userDetailsService.loadUserByUsername(jwtUtil.generateUsernameFromToken((authToken)));
+                      //set user identity in security context
+                      UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                      authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                      SecurityContextHolder.getContext().setAuthentication(authentication);
+                  }
+
               }
            }catch(Exception e){
                e.getStackTrace();

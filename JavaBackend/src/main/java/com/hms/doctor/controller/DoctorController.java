@@ -1,7 +1,9 @@
 package com.hms.doctor.controller;
 
+import com.hms.auth.services.UserDetailsServiceImpl;
 import com.hms.doctor.dto.MedicationDTO;
 import com.hms.doctor.entity.Doctor;
+import com.hms.doctor.payload.request.AddNewPatient;
 import com.hms.patient.entity.Medication;
 import com.hms.doctor.service.DoctorService;
 import com.hms.patient.entity.Patient;
@@ -9,16 +11,38 @@ import com.hms.patient.service.PatientService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/doctor/")
 @PreAuthorize("hasAuthority('DOCTOR')")
 public class DoctorController {
     private final DoctorService doctorService;
     private final PatientService patientService;
+    private final UserDetailsServiceImpl userDetailsService;
 
-    public DoctorController(DoctorService doctorService, PatientService patientService) {
+
+    public DoctorController(DoctorService doctorService, PatientService patientService, UserDetailsServiceImpl userDetailsService) {
         this.doctorService = doctorService;
         this.patientService = patientService;
+        this.userDetailsService = userDetailsService;
+    }
+
+    @PostMapping("patients/add")
+    public String addPatient(@RequestBody AddNewPatient patientRequest){
+        int doctorId = userDetailsService.getUserId(patientRequest.getDoctorUsername());
+       // if (userId == 0) return ("Username already exists, please choose another username");
+        Doctor doctor = doctorService.findById(31);
+        Set<Patient> patientSet = new LinkedHashSet<>();
+        Patient patient = new Patient();
+        patient.setFirstName(patientRequest.getFirstName()) ;
+        patient.setLastName(patientRequest.getLastName());
+        patient.setAge(patientRequest.getAge());
+        patientSet.add(patient);
+        doctor.setPatients(patientSet);
+        doctorService.save(doctor);
+       return ("Patient Added Successfully");
     }
 
     @PutMapping("patients/update")
