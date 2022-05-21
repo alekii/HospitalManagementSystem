@@ -1,7 +1,7 @@
 package com.hms.doctor.dao;
 
 import com.hms.doctor.entity.Doctor;
-import com.hms.patient.entity.Medication;
+import com.hms.patient.entity.Patient;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -56,3 +56,4 @@ public class DoctorDAOImpl implements DoctorDAO {
     }
 
 }
+

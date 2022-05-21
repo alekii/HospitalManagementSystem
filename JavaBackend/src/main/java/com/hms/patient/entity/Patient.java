@@ -1,5 +1,7 @@
 package com.hms.patient.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hms.common.model.Gender;
 import com.hms.doctor.entity.Doctor;
 
 import javax.persistence.*;
@@ -33,10 +35,14 @@ public class Patient {
     @Column(name="last_name")
     private String lastName;
 
-    @Column(name="Age")
+    @Column(name="age")
     private int age;
 
+    @Column(name="gender")
+    private Gender gender;
+
     @ManyToMany(mappedBy = "patients")
+    @JsonIgnore
     private Set<Doctor> doctors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL,orphanRemoval = true)

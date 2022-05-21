@@ -3,6 +3,7 @@ package com.hms.doctor.service;
 import com.hms.doctor.dao.DoctorDAO;
 import com.hms.doctor.entity.Doctor;
 import com.hms.patient.entity.Medication;
+import com.hms.patient.entity.Patient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,5 +40,6 @@ public class DoctorServiceImpl implements DoctorService {
     public void delete(int Id) {
         doctorDAO.delete(Id);
     }
+
 
 }
