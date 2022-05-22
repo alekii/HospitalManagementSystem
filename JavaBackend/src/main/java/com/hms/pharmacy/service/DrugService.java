@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class DrugService {
     private final DrugDAO drugDAO;
@@ -20,8 +22,8 @@ public class DrugService {
     }
 
     @Transactional
-    public Drug findDrug(int drugId){
-        return drugDAO.findDrug(drugId);
+    public List<Drug> findDrug(String drugName){
+        return drugDAO.findDrug(drugName);
     }
 
     @Transactional

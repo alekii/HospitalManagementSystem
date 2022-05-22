@@ -55,6 +55,7 @@ function AddNewEmployee() {
     const endPoint = config.signUpEndpoint
     const role = jobFunctionLowerCase.slice(0, jobFunctionLowerCase.length - 1);
     values["role"] = [role];
+    console.log(JSON.stringify(values,null,2))
     const unInterruptedAxiosRequest = axios.create(); 
     const res = await unInterruptedAxiosRequest.post(endPoint, values).then((response)=>{ 
       setFormChanges({username:response.data.message,password:values.password,errors:""}) 
@@ -66,13 +67,11 @@ function AddNewEmployee() {
   async function createUserDetails(values: any) { 
     values["userName"]=formChanges.username 
     const endPoint = config.apiEndpoint + "/admin/employees/" + jobFunctionLowerCase + "/add";
-    const unInterruptedAxiosRequest = axios.create(); 
-    const res = await httpService.post(endPoint, values).then((response)=>{  
+     const res = await httpService.post(endPoint, values).then((response)=>{  
       console.log(response.data)
       setSuccessMessage(response.data) 
     }).catch((error)=>{ 
-       setSuccessMessage("err!") 
-    
+       setSuccessMessage("err!")  
     })
   }
 

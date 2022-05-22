@@ -2,7 +2,9 @@ package com.hms.reception.service;
 
 import com.hms.reception.entity.Appointment;
 
+import java.util.List;
+
 public interface AppointmentService {
      void createAppointment(Appointment appointment);
-     boolean appointmentExists(int doctorId, String patientName);
+     List<Appointment> findAll();
 }

@@ -51,7 +51,6 @@ public class DoctorRoleController {
 
         doctor.setGender(gender);
         doctor.setRoom(doctorRequest.getRoom());
-        System.out.println(doctor.toString());
          doctorService.save(doctor);
         return "doctor added successfully";
     }

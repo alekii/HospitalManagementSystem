@@ -10,6 +10,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,5 +37,5 @@ public class Receptionist {
     @Column(name="gender")
     private Gender gender;
     @Column(name="date_registered")
-    private Date dateRegistered;
+    private Timestamp dateRegistered = Timestamp.from(Instant.now());
 }

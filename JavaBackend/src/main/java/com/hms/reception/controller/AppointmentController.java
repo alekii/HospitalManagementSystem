@@ -3,13 +3,14 @@ package com.hms.reception.controller;
 import com.hms.reception.entity.Appointment;
 import com.hms.reception.payload.request.AppointmentRequest;
 import com.hms.reception.service.AppointmentService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/appointment/")
+@PreAuthorize("hasAuthority('RECEPTIONIST')")
 public class AppointmentController {
     private final AppointmentService appointmentService;
 
@@ -19,17 +20,15 @@ public class AppointmentController {
 
     @PostMapping("new")
     public String createAppointment(@RequestBody AppointmentRequest appointmentRequest) {
-        boolean exists = appointmentService.appointmentExists(appointmentRequest.getDoctorId(), appointmentRequest.getPatientName());
-        if (exists) {
-            Appointment appointment = new Appointment();
-            appointment.setDoctorID(appointmentRequest.getDoctorId());
+      Appointment appointment = new Appointment();
+            appointment.setRoom(appointmentRequest.getRoom());
             appointment.setPatientName(appointmentRequest.getPatientName());
-            appointment.setAppointmentTime(appointmentRequest.getAppointmentTime());
             appointmentService.createAppointment(appointment);
             return "Appointment made successfully";
-        } else {
-            return "Appointment Already exists";
-        }
     }
 
+    @GetMapping("find/all")
+   public List<Appointment> findAllAppointments(){
+        return appointmentService.findAll();
+    }
 }

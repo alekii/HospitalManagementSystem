@@ -52,10 +52,15 @@ public class SignUp {
                              .orElseThrow(() -> new RuntimeException("error"));
                      roles.add(doctorRole);
                      break;
-                 case "pharmacist":
-                     Role patientRole = roleRepository.findByRolename(RoleEnum.PHARMACIST)
+                     case "receptionist":
+                     Role receptionistRole = roleRepository.findByRolename(RoleEnum.RECEPTIONIST)
                              .orElseThrow(() -> new RuntimeException("error"));
-                     roles.add(patientRole);
+                     roles.add(receptionistRole);
+                     break;
+                 case "pharmacist":
+                     Role pharmacistRole = roleRepository.findByRolename(RoleEnum.PHARMACIST)
+                             .orElseThrow(() -> new RuntimeException("error"));
+                     roles.add(pharmacistRole);
              }
         }
 

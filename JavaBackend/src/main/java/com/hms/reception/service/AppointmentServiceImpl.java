@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
@@ -24,8 +25,8 @@ public class AppointmentServiceImpl implements AppointmentService{
     }
 
     @Override
-    @Transactional
-    public boolean appointmentExists(int doctorId, String patientName) {
-        return appointmentDAO.appointmentExists(doctorId,patientName);
+    public List<Appointment> findAll() {
+        return appointmentDAO.findAll();
     }
+
 }

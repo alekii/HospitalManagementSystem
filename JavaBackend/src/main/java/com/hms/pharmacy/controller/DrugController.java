@@ -5,6 +5,8 @@ import com.hms.pharmacy.entity.Drug;
 import com.hms.pharmacy.service.DrugService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/drugs/")
 public class DrugController {
@@ -16,9 +18,9 @@ public class DrugController {
         return "Drug added successfully";
     }
 
-    @GetMapping("find/{drugId}")
-    public Drug findDrug(@RequestBody int drugId){
-        return  drugService.findDrug(drugId);
+    @GetMapping("find/{drugName}")
+    public List<Drug> findDrug(@RequestBody String drugName){
+        return  drugService.findDrug(drugName);
     }
 
      @PostMapping("sell")

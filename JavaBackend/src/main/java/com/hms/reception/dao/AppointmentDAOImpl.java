@@ -23,10 +23,10 @@ public class AppointmentDAOImpl implements AppointmentDAO{
     }
 
     @Override
-    public boolean appointmentExists(int doctorId, String patientName) {
+    public boolean appointmentExists(String room, String patientName) {
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<Appointment> findAppointmentQuery = currentSession.createQuery("from Appointment where doctorId=:theDoctorId and patientId=:thePatientName", Appointment.class);
-        findAppointmentQuery.setParameter("theDoctorId",doctorId);
+        Query<Appointment> findAppointmentQuery = currentSession.createQuery("from Appointment where room=:theRoom and patientId=:thePatientName", Appointment.class);
+        findAppointmentQuery.setParameter("theRoom",room);
         findAppointmentQuery.setParameter("thePatientName", patientName);
          List<Appointment> results = findAppointmentQuery.getResultList();
          if (results == null) return false;
@@ -38,5 +38,12 @@ public class AppointmentDAOImpl implements AppointmentDAO{
               }
           }
          return exists;
+    }
+
+    @Override
+    public List<Appointment> findAll() {
+        Session session = entityManager.unwrap(Session.class);
+        Query<Appointment> appointmentQuery = session.createQuery("from Appointment",Appointment.class);
+       return appointmentQuery.getResultList();
     }
 }

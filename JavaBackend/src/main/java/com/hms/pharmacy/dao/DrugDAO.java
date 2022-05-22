@@ -2,9 +2,11 @@ package com.hms.pharmacy.dao;
 
 import com.hms.pharmacy.entity.Drug;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Repository
 public class DrugDAO {
@@ -18,10 +20,11 @@ public class DrugDAO {
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(drug);
     }
-    public Drug findDrug(int drugId){
+    public List<Drug> findDrug(String drugName){
         Session session = entityManager.unwrap(Session.class);
-        return session.get(Drug.class,drugId);
-
+        Query<Drug> drugQuery = session.createQuery("from Drug where drugName LIKE :theDrugName",Drug.class);
+        drugQuery.setParameter("theDrugName",drugName);
+        return  drugQuery.getResultList();
     }
 
     public double sellDrug(int drugId, int drugQuantity){
