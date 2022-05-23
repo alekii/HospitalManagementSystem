@@ -12,12 +12,21 @@ const initialState: drugsState = {
 export const drugsCartReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case "addDrugsToCart":
-      return { ...state, drugs: state.drugs.concat(action.payload) };
+      //No mutation?
+      //find Index  
+      const index = state.drugs.findIndex(drug=>drug.drugName ===action.payload[0].drugName) 
+      if(index<0) return { ...state, drugs: state.drugs.concat(action.payload) };
+      let newArr= [...state.drugs] //new Array
+      newArr[index].drugQuantity += action.payload[0].drugQuantity //assign new value
+       return {...state,drugs:newArr}; 
     case "removeDrugFromCart":
       const filteredDrugs = state.drugs.filter(
         (drug) => drug.drugName !== action.payload
       );
       return { ...state, drugs: filteredDrugs };
+
+    case "clearCart":
+      return {...state,drugs:[]}  
     default: {
       return { ...state };
     }

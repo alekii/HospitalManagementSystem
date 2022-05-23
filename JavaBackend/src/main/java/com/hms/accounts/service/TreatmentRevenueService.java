@@ -1,8 +1,7 @@
 package com.hms.accounts.service;
 
 import com.hms.accounts.dao.TreatmentRevenueDAO;
-import com.hms.accounts.dto.TreatmentRevenueDTO;
-import com.hms.accounts.entity.DrugSale;
+import com.hms.accounts.request.TreatmentRevenueRequest;
 import com.hms.accounts.entity.TreatmentRevenue;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,7 @@ public class TreatmentRevenueService {
       }
 
     @Transactional
-    public List<TreatmentRevenueDTO> getTreatmentRevenueBetweenTwoDates(Timestamp fromDate, Timestamp toDate){
+    public List<TreatmentRevenueRequest> getTreatmentRevenueBetweenTwoDates(Timestamp fromDate, Timestamp toDate){
         //return drug_name + quantity + amount
         //later use this info to calculate total on FrontEnd
         return treatmentRevenueDAO.getTreatmentRevenueBetweenTwoDates(fromDate,toDate);

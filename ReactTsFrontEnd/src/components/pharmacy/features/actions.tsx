@@ -11,3 +11,10 @@ export const removeFromCart=(index:number)=>{
         payload:index
     }
 }
+
+export const clearCart=()=>{
+    return{
+        type:"clearCart",
+        payload:"clear"
+    }
+}

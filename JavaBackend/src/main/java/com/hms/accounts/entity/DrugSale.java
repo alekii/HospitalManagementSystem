@@ -1,8 +1,7 @@
 package com.hms.accounts.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.Instant;
+
 import lombok.*;
 
 @AllArgsConstructor
@@ -17,14 +16,14 @@ public class DrugSale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
-    @Column(name="drug_id")
-    private int drugId;
+    @Column(name="drug_name")
+    private String drugName;
+    @ManyToOne(fetch=FetchType.LAZY)
+    private DrugSaleReceipt drugSaleReceipts;
     @Column(name="drug_cost")
-    private double drugCost;
+    private double drugPrice;
     @Column(name="drug_quantity")
     private int drugQuantity;
-    @Column(name="date_sale_made")
-    private final Timestamp dateOfSale = Timestamp.from(Instant.now());
 
     //we can generate total on the fly no need to store
 }

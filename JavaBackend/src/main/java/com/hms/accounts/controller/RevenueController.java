@@ -1,12 +1,14 @@
 package com.hms.accounts.controller;
 
-import com.hms.accounts.dto.DrugSaleDTO;
-import com.hms.accounts.dto.TreatmentRevenueDTO;
+import com.hms.accounts.entity.DrugSaleReceipt;
+import com.hms.accounts.request.DrugSaleRequest;
+import com.hms.accounts.request.TreatmentRevenueRequest;
 import com.hms.accounts.request.FetchByDate;
 import com.hms.accounts.entity.DrugSale;
 import com.hms.accounts.entity.TreatmentRevenue;
 import com.hms.accounts.service.DrugSaleService;
 import com.hms.accounts.service.TreatmentRevenueService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,25 +25,34 @@ public class RevenueController {
         this.treatmentRevenueService = treatmentRevenueService;
     }
 
-    @PostMapping("drugsale/add")
-    public String addDrugSale(@RequestBody DrugSale drugSale){
-        drugSaleService.addDrugSale(drugSale);
+    @PostMapping(value = "drugsale/add", consumes = "application/json")
+    @PreAuthorize("hasAuthority('PHARMACIST')")
+    public String addDrugSale(@RequestBody DrugSaleRequest drugSaleRequest){
+        //System.out.println(drugSaleRequest);
+        DrugSaleReceipt drugSaleReceipt  = new DrugSaleReceipt();
+        drugSaleRequest.getDrugSaleList().forEach(drugSale->{
+            drugSaleReceipt.addReceipt(drugSale);
+        });  
+        drugSaleService.addDrugSaleReceipt(drugSaleReceipt);
         return "Drug Sale added Successfully";
     }
 
     @PostMapping("treatment/add")
+    @PreAuthorize("hasAuthority('DOCTOR')")
     public String addTreatmentRevenue(@RequestBody TreatmentRevenue treatmentRevenue){
         treatmentRevenueService.saveTreatmentRevenue(treatmentRevenue);
         return "Treatment Revenue Sale added Successfully";
     }
 
     @GetMapping("drugsales/find")
-    public List<DrugSaleDTO> findDrugSales(@RequestBody FetchByDate fetchByDate){
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<DrugSaleRequest> findDrugSales(@RequestBody FetchByDate fetchByDate){
         return drugSaleService.getDrugSalesBetweenTwoDates(fetchByDate.getFromDate(),fetchByDate.getToDate());
     }
 
     @GetMapping("treatmentrevenue/find")
-    public List<TreatmentRevenueDTO> findTreatmentRevenue(@RequestBody FetchByDate fetchByDate){
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<TreatmentRevenueRequest> findTreatmentRevenue(@RequestBody FetchByDate fetchByDate){
         return  treatmentRevenueService.getTreatmentRevenueBetweenTwoDates(fetchByDate.getFromDate(),fetchByDate.getToDate());
     }
 }

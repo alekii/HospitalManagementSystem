@@ -1,10 +1,10 @@
-package com.hms.accounts.dto;
+package com.hms.accounts.request;
 
-public class TreatmentRevenueDTO {
+public class TreatmentRevenueRequest {
     private  int patientId;
     private double treatmentAmount;
 
-    public TreatmentRevenueDTO(int patientId, double treatmentAmount) {
+    public TreatmentRevenueRequest(int patientId, double treatmentAmount) {
         this.patientId = patientId;
         this.treatmentAmount = treatmentAmount;
     }

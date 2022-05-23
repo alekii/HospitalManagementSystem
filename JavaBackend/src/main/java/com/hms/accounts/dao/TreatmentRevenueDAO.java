@@ -1,9 +1,8 @@
 package com.hms.accounts.dao;
 
-import com.hms.accounts.dto.TreatmentRevenueDTO;
+import com.hms.accounts.request.TreatmentRevenueRequest;
 import com.hms.accounts.entity.TreatmentRevenue;
 import org.hibernate.Session;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -24,9 +23,9 @@ public class TreatmentRevenueDAO {
       }
 
       //Find Treatment Revenue by timeStamp ->time_from to time_to
-      public List<TreatmentRevenueDTO> getTreatmentRevenueBetweenTwoDates(Timestamp fromDate, Timestamp toDate){
+      public List<TreatmentRevenueRequest> getTreatmentRevenueBetweenTwoDates(Timestamp fromDate, Timestamp toDate){
           Session session = entityManager.unwrap(Session.class);
-          return session.createNativeQuery("select new com/hms/accounts/dto/TreatmentRevenueDTO(t.patientId,t.treatmentAmount) from TreatmentRevenue t where t.paymentDate>:fromTimestamp and d.paymentDate <: toTimestamp",TreatmentRevenueDTO.class)
+          return session.createNativeQuery("select new com/hms/accounts/dto/TreatmentRevenueDTO(t.patientId,t.treatmentAmount) from TreatmentRevenue t where t.paymentDate>:fromTimestamp and d.paymentDate <: toTimestamp", TreatmentRevenueRequest.class)
                   .setParameter("fromTimestamp",fromDate).setParameter("toTimestamp",toDate)
                   .getResultList();
       }

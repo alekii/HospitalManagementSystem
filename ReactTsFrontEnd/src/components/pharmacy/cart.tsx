@@ -1,10 +1,13 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Button } from "@chakra-ui/react";
 import TableUtil from "../common/tableutil";
 import TableProps from "../common/interface/tableprops";
 import { FiX } from "react-icons/fi";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "./features/actions";
+import { clearCart, removeFromCart } from "./features/actions"; 
+import config from "../../config/config.json";
+import httpService from "../../service/httpService";
+
 
 function Cart() {
   const TableItems: Array<TableProps> = [
@@ -25,6 +28,9 @@ function Cart() {
   let [cartTotal, setCartTotal] = React.useState(0);
   let [tableItems, setTableItems] = React.useState(TableItems);
   let [dataPresent, setDataPresent] = React.useState(false);
+  let [receiptReady, setReceiptReady] = React.useState(false);
+  
+  
   if (!cart) {
     return NoItemsInCart();
   }
@@ -40,11 +46,6 @@ function Cart() {
       itemsInCart[3] = drug.drugPrice * drug.drugQuantity;
       total += itemsInCart[3];
       tableBodyValues[index] = itemsInCart;
-      // console.log(tableBodyValues)
-      // if(tableBodyValues[index].includes(drug.drugName)){
-      //     tableBodyValues[index][2] += drug.drugQuantity
-      //     tableBodyValues[index][3] = tableBodyValues[index][2] * drug.drugPrice
-      // }
       itemsInCart = [];
     });
     setTableBodyValues(tableBodyValues, total);
@@ -73,6 +74,22 @@ function Cart() {
   if (dataPresent === false) {
     return NoItemsInCart();
   }
+
+  async function processDrugSale(){
+      let drugSaleList = {drugSaleList:cart} 
+      console.log(drugSaleList)
+      const endPoint = config.apiEndpoint+'/admin/revenue/drugsale/add'
+      await httpService.post(endPoint, drugSaleList).then(response=>{
+        setReceiptReady(true)
+        dispatch(clearCart())
+       }).catch((error)=>{
+          console.log(error)
+      })
+  }
+  if (receiptReady) {
+    return showReceipt();
+  }
+
   return (
     <Box w="80%" margin="50px 0 0 0">
       <TableUtil
@@ -85,6 +102,17 @@ function Cart() {
       <Box as="p" textAlign="end" fontSize="17px">
         <strong>Total: </strong>Kshs {cartTotal}
       </Box>
+        <Button onClick={processDrugSale} 
+                float='right'
+                mt='30px' 
+                px='8'
+                bg='#777873'
+                color='white'  
+                 _hover={{
+                    bg: "#757",
+                    color: "white",
+                  }} 
+                 >Process Sale</Button>
     </Box>
   );
 }
@@ -93,10 +121,22 @@ function NoItemsInCart() {
   return (
     <Box w="80%" margin="50px 0 0 0">
       <Box as="p" textAlign="center" fontSize="17px">
-        <strong>INFO: </strong> No Items in cart
+        <strong>INFO: </strong> No items in Cart  
       </Box>
     </Box>
   );
 }
 
+function showReceipt() {  
+    return (
+   <Box w="80%" margin="50px 0 0 0">
+     <Box as="p" textAlign="center" fontSize="17px">
+       <strong>INFO: </strong> Receipt is ready to be printed 
+     </Box>
+   </Box>
+ );
+}
+
 export default Cart;
+
+

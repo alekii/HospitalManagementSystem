@@ -64,7 +64,7 @@ function TableUtil({tablecaption,handleClick, heading, bodyvalues, addToCart,ico
                       <Input 
                       type="text"
                       id="drugQuantity"
-                       w="50px" 
+                       w="70px" 
                        mr='20px'
                         backgroundColor='white'
                         {...register("drugQuantity")}>

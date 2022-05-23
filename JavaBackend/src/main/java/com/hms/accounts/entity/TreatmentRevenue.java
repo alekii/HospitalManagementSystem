@@ -21,6 +21,4 @@ public class TreatmentRevenue {
     private Timestamp paymentDate;
     private double treatmentAmount;
 
-
-
 }
