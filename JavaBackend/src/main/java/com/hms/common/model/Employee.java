@@ -17,7 +17,5 @@ import java.sql.Date;
 public abstract class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
-
-
+    private int employeeId;   
 }

@@ -8,10 +8,18 @@
   Icon,
   Thead,
   Tr,
+  FormControl,
+  Input,
+  Button,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
-
-function TableUtil({tablecaption,handleClick, heading, bodyvalues, icon }: any) {
+function TableUtil({tablecaption,handleClick, heading, bodyvalues, addToCart,icon,handleAddToCart}: any) {
+  
+  
+  const {handleSubmit,register,formState:{errors,isSubmitting}} = useForm()
+  
+  
   return (
     <TableContainer>
       <Table variant="striped" colorScheme="teal">
@@ -38,6 +46,36 @@ function TableUtil({tablecaption,handleClick, heading, bodyvalues, icon }: any) 
                     onClick={(event) => handleClick(event, index)}
                   >
                     <Icon as={icon}></Icon>
+                  </Td>
+                )}
+                {addToCart &&(
+                  <Td>
+                    <form onSubmit={handleSubmit(handleAddToCart)}>
+                    <FormControl><Input 
+                      type="text"
+                      id="index" 
+                      w='0'
+                      h='0'
+                      visibility='hidden' 
+                      value={index}
+                        {...register("index")}>
+                          
+                        </Input>
+                      <Input 
+                      type="text"
+                      id="drugQuantity"
+                       w="50px" 
+                       mr='20px'
+                        backgroundColor='white'
+                        {...register("drugQuantity")}>
+
+                        </Input>
+                      <Button type="submit"
+                              w="120px"  
+                              isLoading={isSubmitting}
+                      >Add To Cart</Button>
+                    </FormControl>
+                    </form>
                   </Td>
                 )}
               </Tr>

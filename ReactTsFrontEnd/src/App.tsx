@@ -28,6 +28,7 @@ import FindAllEmployeesByCareerName from "./components/admin/findAll";
 import React from "react";
 import ProtectedRoutes from "./components/protectedroutes";
 import jwt_decode from "jwt-decode";
+import SearchResults from "./components/pharmacy/searchresults";
 
 export default function App() {
   const navigate = useNavigate();
@@ -123,6 +124,7 @@ export default function App() {
             <Route path="Pharmacist" element={<Pharmacist />}>
               <Route path="Drugs" element={<Drugs />}>
                 <Route path="cart" element={<Cart />} />
+                <Route path="search/:searchTerm" element={<SearchResults/>} />
               </Route>
             </Route>
             </Route>

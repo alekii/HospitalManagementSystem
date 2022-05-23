@@ -9,6 +9,7 @@ import httpService from "../../service/httpService";
 import config from "../../config/config.json";
 
 
+function FindAllAppointments() {
 const linkToPatientDetail = '/doctor/patients/details'
 const TableItems: Array<TableProps> = [
     {
@@ -20,7 +21,6 @@ const TableItems: Array<TableProps> = [
     },
 ]
 
-function FindAllAppointments() {
     const navigate = useNavigate() 
     const [bodyValues, setBodyValues] = React.useState([[]]);
     const [dataPresent, setDataPresent] = React.useState(false);

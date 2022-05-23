@@ -5,6 +5,7 @@ import {
 import LinkItemProps from '../common/interface/linkitemprops';
 import { Box, Flex } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 
 
 const LinkItems: Array<LinkItemProps> = [ 

@@ -1,9 +1,9 @@
-import { Box, TableCaption } from "@chakra-ui/react";
+import { Box} from "@chakra-ui/react";
 import TableUtil from '../common/tableutil';
 import TableProps from '../common/interface/tableprops'
-import { FiEdit, FiPenTool, FiX } from "react-icons/fi";
+import { FiEdit,  } from "react-icons/fi";
 import React from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import httpService from "../../service/httpService";
 import authService from "../../service/authService";
 import config from "../../config/config.json";

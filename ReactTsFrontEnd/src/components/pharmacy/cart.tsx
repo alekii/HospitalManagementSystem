@@ -1,42 +1,102 @@
 import { Box } from "@chakra-ui/react";
-import TableUtil from '../common/tableutil';
-import TableProps from '../common/interface/tableprops'
+import TableUtil from "../common/tableutil";
+import TableProps from "../common/interface/tableprops";
 import { FiX } from "react-icons/fi";
 import React from "react";
-
-
-const TableItems: Array<TableProps> = [
-    {
-        heading: ['Drug Name', 'Amount', 'Quantity', 'SubTotal', 'Action'],
-        bodyvalues: [ 
-            ['Amoxil','30', '10', 300], 
-            ['Aspirin','200','3',600],
-            ['Mara Moja', '3', '10', 30],
-        ],
-        icon:FiX,
-        tablecaption:'Drugs Shopping Cart'
-    },
-]
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "./features/actions";
 
 function Cart() {
-    let [tableItems,setTableItems] = React.useState(TableItems)
-    const removeItem=(event:React.MouseEventHandler<HTMLTableColElement>,index:number)=>{ 
-        tableItems = TableItems[0].bodyvalues.splice(index,1)
-        setTableItems(tableItems) 
-    }
+  const TableItems: Array<TableProps> = [
+    {
+      heading: ["Drug Name", "Amount", "Quantity", "SubTotal", "Action"],
+      bodyvalues: [
+        ["Amoxil", "30", "10", 300],
+        ["Aspirin", "200", "3", 600],
+        ["Mara Moja", "3", "10", 30],
+      ],
+      icon: FiX,
+      tablecaption: "Drugs Shopping Cart",
+    },
+  ];
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state?.drugs);
+  const [bodyValues, setBodyValues] = React.useState([]);
+  let [cartTotal, setCartTotal] = React.useState(0);
+  let [tableItems, setTableItems] = React.useState(TableItems);
+  let [dataPresent, setDataPresent] = React.useState(false);
+  if (!cart) {
+    return NoItemsInCart();
+  }
+  React.useEffect(() => {
+    let itemsInCart: any = [];
+    let total = 0;
+    let tableBodyValues: any = [];
 
+    cart.map((drug: any, index: number) => {
+      itemsInCart[0] = drug.drugName;
+      itemsInCart[1] = drug.drugPrice;
+      itemsInCart[2] = drug.drugQuantity;
+      itemsInCart[3] = drug.drugPrice * drug.drugQuantity;
+      total += itemsInCart[3];
+      tableBodyValues[index] = itemsInCart;
+      // console.log(tableBodyValues)
+      // if(tableBodyValues[index].includes(drug.drugName)){
+      //     tableBodyValues[index][2] += drug.drugQuantity
+      //     tableBodyValues[index][3] = tableBodyValues[index][2] * drug.drugPrice
+      // }
+      itemsInCart = [];
+    });
+    setTableBodyValues(tableBodyValues, total);
+    setDataPresent(true);
+  }, []);
+
+  function setTableBodyValues(tableBodyValues: any, total: number) {
+    setCartTotal(total);
+    setBodyValues(tableBodyValues);
+  }
+  const removeItem = (
+    event: React.MouseEventHandler<HTMLTableColElement>,
+    index: number
+  ) => {
+    dispatch(removeFromCart(bodyValues[index][0]));
+    tableItems = bodyValues.splice(index, 1);
+    setTableItems(tableItems);
     let totalAmount = 0;
-  
-    TableItems[0].bodyvalues.map(s => {
-        totalAmount += s[3]
-    })
+    bodyValues.length === 0
+      ? setDataPresent(false)
+      : bodyValues.map((s) => {
+          totalAmount += s[3];
+          setCartTotal(totalAmount);
+        });
+  };
+  if (dataPresent === false) {
+    return NoItemsInCart();
+  }
+  return (
+    <Box w="80%" margin="50px 0 0 0">
+      <TableUtil
+        tablecaption={TableItems[0].tablecaption}
+        handleClick={removeItem}
+        icon={TableItems[0].icon}
+        heading={TableItems[0].heading}
+        bodyvalues={bodyValues}
+      ></TableUtil>
+      <Box as="p" textAlign="end" fontSize="17px">
+        <strong>Total: </strong>Kshs {cartTotal}
+      </Box>
+    </Box>
+  );
+}
 
-    return (
-        <Box w="80%" margin='50px 0 0 0'>
-            <TableUtil tablecaption={TableItems[0].tablecaption} handleClick={removeItem} icon={TableItems[0].icon} heading={TableItems[0].heading} bodyvalues={TableItems[0].bodyvalues}></TableUtil>
-            <Box as='p' textAlign='end' fontSize='17px'><strong>Total: </strong>Kshs {totalAmount}</Box>
-        </Box>
-    );
+function NoItemsInCart() {
+  return (
+    <Box w="80%" margin="50px 0 0 0">
+      <Box as="p" textAlign="center" fontSize="17px">
+        <strong>INFO: </strong> No Items in cart
+      </Box>
+    </Box>
+  );
 }
 
 export default Cart;
