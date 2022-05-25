@@ -10,26 +10,26 @@ public class Medication {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name ="diagnosis")
+    @Column(name = "diagnosis")
     private String diagnosis;
 
-    @Column(name ="drugs")
+    @Column(name = "drugs")
     private String drugs;
 
     //example: x-ray scan
-    @Column(name ="treatment")
+    @Column(name = "treatment")
     private String treatment;
 
-    @Column(name ="date_diagnosed")
+    @Column(name = "date_diagnosed")
     private final Timestamp dateDiagnosed = Timestamp.from(Instant.now());
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient;
 
-    @Column(name ="amount_charged")
+    @Column(name = "amount_charged")
     private double treatmentAmount;
 
     //getters
@@ -44,6 +44,7 @@ public class Medication {
     public String getDrugs() {
         return drugs;
     }
+
     public Timestamp getDateDiagnosed() {
         return dateDiagnosed;
     }
@@ -75,4 +76,10 @@ public class Medication {
     public void setTreatmentAmount(double treatmentAmount) {
         this.treatmentAmount = treatmentAmount;
     }
+
+    //In a one to many relationship, we override equals and hashcode methods on this side (@ManyToOne)
+
+    //we override equals and hashcode  when we want to check for equality when removing an Object of this class.
+    //We aren't deleting medical history for patient so no need of overriding equals and hashcode
+
 }

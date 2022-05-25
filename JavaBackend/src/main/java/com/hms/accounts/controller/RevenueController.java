@@ -28,12 +28,12 @@ public class RevenueController {
     @PostMapping(value = "drugsale/add", consumes = "application/json")
     @PreAuthorize("hasAuthority('PHARMACIST')")
     public String addDrugSale(@RequestBody DrugSaleRequest drugSaleRequest){
-        //System.out.println(drugSaleRequest);
         DrugSaleReceipt drugSaleReceipt  = new DrugSaleReceipt();
         drugSaleRequest.getDrugSaleList().forEach(drugSale->{
             drugSaleReceipt.addReceipt(drugSale);
-        });  
+        });
         drugSaleService.addDrugSaleReceipt(drugSaleReceipt);
+        //Return Receipt here? Redirect request
         return "Drug Sale added Successfully";
     }
 

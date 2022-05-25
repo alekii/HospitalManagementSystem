@@ -4,10 +4,9 @@ import TableProps from "../common/interface/tableprops";
 import { FiX } from "react-icons/fi";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, removeFromCart } from "./features/actions"; 
+import { clearCart, removeFromCart } from "./features/actions";
 import config from "../../config/config.json";
 import httpService from "../../service/httpService";
-
 
 function Cart() {
   const TableItems: Array<TableProps> = [
@@ -29,8 +28,7 @@ function Cart() {
   let [tableItems, setTableItems] = React.useState(TableItems);
   let [dataPresent, setDataPresent] = React.useState(false);
   let [receiptReady, setReceiptReady] = React.useState(false);
-  
-  
+
   if (!cart) {
     return NoItemsInCart();
   }
@@ -46,7 +44,7 @@ function Cart() {
       itemsInCart[3] = drug.drugPrice * drug.drugQuantity;
       total += itemsInCart[3];
       tableBodyValues[index] = itemsInCart;
-      itemsInCart = [];
+      itemsInCart = []; 
     });
     setTableBodyValues(tableBodyValues, total);
     setDataPresent(true);
@@ -75,16 +73,18 @@ function Cart() {
     return NoItemsInCart();
   }
 
-  async function processDrugSale(){
-      let drugSaleList = {drugSaleList:cart} 
-      console.log(drugSaleList)
-      const endPoint = config.apiEndpoint+'/admin/revenue/drugsale/add'
-      await httpService.post(endPoint, drugSaleList).then(response=>{
-        setReceiptReady(true)
-        dispatch(clearCart())
-       }).catch((error)=>{
-          console.log(error)
+  async function processDrugSale() {
+    let drugSaleList = { drugSaleList: cart };
+    const endPoint = config.apiEndpoint + "/api/drugsalereceipt/find"
+    await httpService
+      .get(endPoint)
+      .then((response) => {
+        setReceiptReady(true);
+        dispatch(clearCart());
       })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   if (receiptReady) {
     return showReceipt();
@@ -102,17 +102,20 @@ function Cart() {
       <Box as="p" textAlign="end" fontSize="17px">
         <strong>Total: </strong>Kshs {cartTotal}
       </Box>
-        <Button onClick={processDrugSale} 
-                float='right'
-                mt='30px' 
-                px='8'
-                bg='#777873'
-                color='white'  
-                 _hover={{
-                    bg: "#757",
-                    color: "white",
-                  }} 
-                 >Process Sale</Button>
+      <Button
+        onClick={processDrugSale}
+        float="right"
+        mt="30px"
+        px="8"
+        bg="#777873"
+        color="white"
+        _hover={{
+          bg: "#757",
+          color: "white",
+        }}
+      >
+        Process Sale
+      </Button>
     </Box>
   );
 }
@@ -121,22 +124,21 @@ function NoItemsInCart() {
   return (
     <Box w="80%" margin="50px 0 0 0">
       <Box as="p" textAlign="center" fontSize="17px">
-        <strong>INFO: </strong> No items in Cart  
+        <strong>INFO: </strong> No items in Cart
       </Box>
     </Box>
   );
 }
 
-function showReceipt() {  
-    return (
-   <Box w="80%" margin="50px 0 0 0">
-     <Box as="p" textAlign="center" fontSize="17px">
-       <strong>INFO: </strong> Receipt is ready to be printed 
-     </Box>
-   </Box>
- );
+function showReceipt() {
+  //Show Receipt here to be printed/ Returned from server
+  return (
+    <Box w="80%" margin="50px 0 0 0">
+      <Box as="p" textAlign="center" fontSize="17px">
+        <strong>INFO: </strong> Receipt is ready to be printed
+      </Box>
+    </Box>
+  );
 }
 
 export default Cart;
-
-

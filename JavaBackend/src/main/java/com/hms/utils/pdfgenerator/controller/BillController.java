@@ -40,7 +40,6 @@ public class BillController {
     public int generatepdf(@PathVariable int id ){
         System.out.println(id);
         return id;
-
   }
 
 }

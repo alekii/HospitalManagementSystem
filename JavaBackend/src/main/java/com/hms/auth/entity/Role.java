@@ -16,16 +16,14 @@ import javax.persistence.*;
 @Table(name="roles")
 public class Role {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-
     @Enumerated(EnumType.STRING)
-    @Column(name="rolename")
+    @Column(name = "rolename")
+    @ManyToMany(mappedBy = "role")
     private RoleEnum rolename;
 
 
 }
-
-

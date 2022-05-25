@@ -1,5 +1,6 @@
 package com.hms.doctor.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hms.auth.entity.UserData;
 import com.hms.common.model.Employee;
 import com.hms.common.model.Gender;
 import com.hms.patient.entity.Patient;
@@ -24,6 +25,7 @@ import lombok.*;
 @Table(name="doctors")
 public class Doctor extends Employee {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int Id;
 
@@ -47,6 +49,9 @@ public class Doctor extends Employee {
 
     @Column(name = "room")
     private String Room;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    private UserData user;
 
     //avoid chain deletion
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
@@ -91,7 +96,7 @@ public class Doctor extends Employee {
         this.patients = patients;
     }
 
-    //since we use hashSet
+    //since we use hashSet & it's a @ManyToMany R/ship
     @Override
     public boolean equals(Object obj) {
         if(this==obj) return true;

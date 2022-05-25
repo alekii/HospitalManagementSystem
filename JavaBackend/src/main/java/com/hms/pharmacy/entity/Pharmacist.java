@@ -1,5 +1,6 @@
 package com.hms.pharmacy.entity;
 
+import com.hms.auth.entity.UserData;
 import com.hms.common.model.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +9,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -36,5 +36,7 @@ import java.time.Instant;
     private Gender gender;
     @Column(name="date_registered")
     private Timestamp dateRegistered = Timestamp.from(Instant.now());
-    }
+    @ManyToOne(fetch=FetchType.LAZY)
+    private UserData user;
+}
 

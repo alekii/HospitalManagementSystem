@@ -22,8 +22,13 @@ public class DrugSaleService {
 
     @Transactional
     public void addDrugSaleReceipt(DrugSaleReceipt drugSaleReceipt) {
-
         drugSaleReceiptDAO.addDrugSaleReceipt(drugSaleReceipt);
+    }
+
+    @Transactional
+    public DrugSaleReceipt getDrugSaleReceipt(int  drugSaleReceiptNumber) {
+        //return drugSaleReceiptDAO.
+        return null;
     }
 
     @Transactional(readOnly = true)

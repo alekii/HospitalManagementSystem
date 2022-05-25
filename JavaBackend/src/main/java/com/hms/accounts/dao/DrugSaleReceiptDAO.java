@@ -20,4 +20,9 @@ public class DrugSaleReceiptDAO {
         Session session = entityManager.unwrap(Session.class);
         session.save(drugSaleReceipt);
     }
+
+    public DrugSaleReceipt getDrugSaleReceipt(int drugSaleReceiptNumber){
+        Session session = entityManager.unwrap(Session.class);
+        return session.get(DrugSaleReceipt.class,drugSaleReceiptNumber);
+    }
 }

@@ -36,7 +36,7 @@ public class DoctorRoleController {
 
     @PostMapping("add")
     public  String addDoctor(@RequestBody DoctorRequest doctorRequest){
-        //find user
+        //find
         int userId = userDetailsService.getUserId(doctorRequest.getUserName());
         if (userId == 0) return ("Username already exists, please choose another username");
         //id is 0 so add
@@ -51,7 +51,7 @@ public class DoctorRoleController {
 
         doctor.setGender(gender);
         doctor.setRoom(doctorRequest.getRoom());
-         doctorService.save(doctor);
+        doctorService.save(doctor);
         return "doctor added successfully";
     }
     @PutMapping("doctors/update")

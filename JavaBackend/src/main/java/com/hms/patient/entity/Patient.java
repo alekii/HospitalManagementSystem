@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -26,29 +25,29 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="age")
+    @Column(name = "age")
     private int age;
 
-    @Column(name="gender")
+    @Column(name = "gender")
     private Gender gender;
 
     @ManyToMany(mappedBy = "patients")
     @JsonIgnore
     private Set<Doctor> doctors = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Medication> medication = new LinkedHashSet<>();
 
-    @Column(name="payment_status",  columnDefinition = "int default '0'")
+    @Column(name = "payment_status", columnDefinition = "int default '0'")
     private PaymentStatus paymentStatus;
 
     public Patient(String firstName, String lastName) {
@@ -56,20 +55,9 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public void addMedication(Medication medic){
+    public void addMedication(Medication medic) {
         medication.add(medic);
         medic.setPatient(this);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(this==obj) return  true;
-        if(!(obj instanceof Patient)) return  false;
-        return Objects.equals(id, ((Patient) obj).getId());
-    }
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
     }
 
 }
